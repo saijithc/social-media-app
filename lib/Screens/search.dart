@@ -18,7 +18,7 @@ class SearchScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
               child: Container(
                 color: Color.fromARGB(189, 186, 185, 185),
-                height: height * 0.075,
+                // height: height * 0.075,
                 child: Column(
                   children: [
                     Row(

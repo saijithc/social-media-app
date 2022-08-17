@@ -26,7 +26,6 @@ class Likes extends StatelessWidget {
               decoration: BoxDecoration(
                   image: const DecorationImage(
                       image: AssetImage("assets/Zayn.jpeg"), fit: BoxFit.cover),
-                  color: Colors.amber,
                   borderRadius: BorderRadius.circular(10)),
             ),
             title: Row(

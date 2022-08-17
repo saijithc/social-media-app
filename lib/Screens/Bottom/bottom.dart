@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:socio/Screens/Bottom/Provider/bottom_provider.dart';
 import 'package:socio/Screens/chat.dart';
 import 'package:socio/Screens/home.dart';
 import 'package:socio/Screens/likes.dart';
@@ -29,16 +31,14 @@ class _BottomState extends State<Bottom> {
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(0.1),
       resizeToAvoidBottomInset: false,
-      body: pages[_currentIndex],
+      body: pages[context.watch<BottomProvder>().currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           //backgroundColor: Colors.amber,
           selectedItemColor: Colors.black,
           unselectedItemColor: const Color.fromARGB(96, 14, 14, 14),
-          currentIndex: _currentIndex,
+          currentIndex: context.watch<BottomProvder>().currentIndex,
           onTap: (newIndex) {
-            setState(() {
-              _currentIndex = newIndex;
-            });
+            context.read<BottomProvder>().update(newIndex);
           },
           items: [
             const BottomNavigationBarItem(

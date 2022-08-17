@@ -9,36 +9,33 @@ class MyPosts extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return SizedBox(
-      height: height,
-      width: width,
-      child: GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-        ),
-        itemCount: 20,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: () {
-                customAlert(context);
-              },
-              child: Container(
-                height: height * 0.1,
-                width: width * 0.1,
-                decoration: BoxDecoration(
-                    image: const DecorationImage(
-                        image: AssetImage("assets/music.jpeg"),
-                        fit: BoxFit.cover),
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.black),
-              ),
-            ),
-          );
-        },
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
       ),
+      itemCount: 20,
+      itemBuilder: (BuildContext context, int index) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
+            onTap: () {
+              customAlert(context);
+            },
+            child: Container(
+              height: height * 0.1,
+              width: width * 0.1,
+              decoration: BoxDecoration(
+                  image: const DecorationImage(
+                      image: AssetImage("assets/music.jpeg"),
+                      fit: BoxFit.cover),
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.black),
+            ),
+          ),
+        );
+      },
     );
   }
 }

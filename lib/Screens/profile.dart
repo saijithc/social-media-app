@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:socio/Screens/highlights.dart';
 import 'package:socio/Screens/myposts.dart';
+import 'package:socio/Screens/settings.dart';
 import 'package:socio/Widgets/buttons.dart';
 import 'package:socio/Widgets/text.dart';
 
@@ -14,15 +15,26 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (ctx) => const Settings()));
+                },
+                icon: const Icon(
+                  Icons.settings_outlined,
+                  size: 25,
+                ))
+          ],
           elevation: 0,
           backgroundColor: const Color.fromARGB(55, 138, 138, 138),
-          leading: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black,
-              )),
-          title: text("profile", Colors.black, height * 0.02, FontWeight.bold),
+          // leading: IconButton(
+          //     onPressed: () {},
+          //     icon: const Icon(
+          //       Icons.arrow_back_ios,
+          //       color: Colors.black,
+          //     )),
+          title: text(" profile", Colors.black, height * 0.02, FontWeight.bold),
         ),
         body: ListView(children: [
           Column(
@@ -155,25 +167,22 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               SingleChildScrollView(
-                child: SizedBox(
-                  height: height,
-                  child: Column(
-                    // mainAxisSize: MainAxisSize.max,
-                    children: [
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      Column(
-                        children: [
-                          const HighLights(),
-                          SizedBox(
-                            height: height * 0.02,
-                          ),
-                          const MyPosts()
-                        ],
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  // mainAxisSize: MainAxisSize.max,
+                  children: [
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    Column(
+                      children: [
+                        const HighLights(),
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        const MyPosts()
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ],

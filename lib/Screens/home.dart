@@ -12,19 +12,17 @@ class HomeScreen extends StatelessWidget {
     // final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        body: ListView(children: [
-          SizedBox(
-            child: Column(
-              children: const [
-                Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: Stories(),
-                ),
-                Posts(),
-              ],
-            ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: const [
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Stories(),
+              ),
+              Posts(),
+            ],
           ),
-        ]),
+        ),
       ),
     );
   }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:socio/Widgets/more.dart';
 import 'package:socio/Widgets/options.dart';
 import 'package:socio/Widgets/text.dart';
 
-customAlert(BuildContext context) {
+import '../Screens/followers_profile.dart';
+
+followersPosts(BuildContext context) {
   final height = MediaQuery.of(context).size.height;
   final width = MediaQuery.of(context).size.width;
   return showDialog(
@@ -35,14 +38,15 @@ customAlert(BuildContext context) {
                             width: width * 0.1,
                             decoration: BoxDecoration(
                                 image: const DecorationImage(
-                                    image: AssetImage("assets/me.jpg"),
+                                    image: AssetImage(
+                                        "assets/Stall  - Chapter 45_.png"),
                                     fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(30)),
                           ),
                           SizedBox(
                             width: width * 0.05,
                           ),
-                          text("your_name", Colors.white, height * 0.02,
+                          text("harrystyles", Colors.white, height * 0.02,
                               FontWeight.w700),
                           SizedBox(
                             width: width * 0.05,
@@ -65,12 +69,17 @@ customAlert(BuildContext context) {
                                   ))
                             ],
                           ),
+                          // text(
+                          //     "2hours ago",
+                          //     const Color.fromARGB(207, 253, 247, 247),
+                          //     height * 0.01,
+                          //     FontWeight.w400),
                           // SizedBox(
-                          //   width: width * 0.18,
+                          //   width: width * 0.23,
                           // ),
                           // IconButton(
                           //     onPressed: () {
-                          //       options(context);
+                          //       more(context);
                           //     },
                           //     icon: const Icon(
                           //       Icons.more_vert,
@@ -85,7 +94,8 @@ customAlert(BuildContext context) {
                         width: width * 0.85,
                         decoration: BoxDecoration(
                             image: const DecorationImage(
-                                image: AssetImage("assets/music.jpeg"),
+                                image: AssetImage(
+                                    "assets/wheels on the bus ➸ [larry au] - ღ chapter two ღ.jpeg"),
                                 fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(30)),
                       ),
@@ -94,7 +104,7 @@ customAlert(BuildContext context) {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: height * 0.05,
+                          height: height * 0.03,
                           width: width * 0.8,
                           child: ListTile(
                             leading: text("Love on tour,New York City😋..",
@@ -131,17 +141,3 @@ customAlert(BuildContext context) {
     },
   );
 }
-// AlertDialog(
-//     content: Column(
-//       children: [
-//         Center(
-//           child: Container(
-//             color: Colors.blue,
-//             height: 100,
-//             width: 100,
-//           ),
-//         )
-//       ],
-//     ),
-//     backgroundColor: Colors.amber,
-//   );

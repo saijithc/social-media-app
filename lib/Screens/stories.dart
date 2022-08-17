@@ -58,7 +58,7 @@ class Stories extends StatelessWidget {
                                 color: Colors.amber,
                                 borderRadius: BorderRadius.circular(30)),
                           ),
-                          text("Highlight", Colors.black, height * 0.015,
+                          text("Stories", Colors.black, height * 0.015,
                               FontWeight.w600),
                         ],
                       ),

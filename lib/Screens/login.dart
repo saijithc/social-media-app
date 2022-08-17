@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:socio/Screens/bottom.dart';
+import 'package:socio/Screens/Bottom/bottom.dart';
 import 'package:socio/Screens/profile.dart';
 import 'package:socio/Screens/signup.dart';
 import 'package:socio/Widgets/textform.dart';
