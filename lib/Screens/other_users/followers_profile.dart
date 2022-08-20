@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:socio/Widgets/alertdialog.dart';
+import 'package:socio/Screens/current_user/tags.dart';
+import 'package:socio/Screens/other_users/followers_highlits.dart';
+import 'package:socio/Screens/other_users/followers_post.dart';
 import 'package:socio/Widgets/buttons.dart';
-import 'package:socio/Widgets/followers_postview.dart';
 import 'package:socio/Widgets/text.dart';
 
 class FollowersProfile extends StatelessWidget {
@@ -117,36 +118,60 @@ class FollowersProfile extends StatelessWidget {
                       SizedBox(
                         height: height * 0.04,
                       ),
-                      GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                        ),
-                        itemCount: 20,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                followersPosts(context);
-                              },
-                              child: Container(
-                                height: height * 0.1,
-                                width: width * 0.1,
-                                decoration: BoxDecoration(
-                                    image: const DecorationImage(
-                                        image: AssetImage(
-                                            "assets/wheels on the bus ➸ [larry au] - ღ chapter two ღ.jpeg"),
-                                        fit: BoxFit.cover),
-                                    color: Colors.amber,
-                                    borderRadius: BorderRadius.circular(30)),
-                              ),
-                            ),
-                          );
-                        },
+                      const FollowersHighLights(),
+                      SizedBox(
+                        height: height * 0.04,
                       ),
+                      DefaultTabController(
+                        length: 2,
+                        child: Column(
+                          children: [
+                            const TabBar(tabs: [
+                              Tab(
+                                icon: Icon(Icons.grid_view_outlined),
+                              ),
+                              Tab(
+                                icon: Icon(Icons.person_pin_circle_outlined),
+                              ),
+                            ]),
+                            SizedBox(
+                              height: width * (20 / 4),
+                              child: const TabBarView(
+                                  children: [FollowersPost(), TagScreen()]),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // GridView.builder(
+                      //   physics: const NeverScrollableScrollPhysics(),
+                      //   shrinkWrap: true,
+                      //   gridDelegate:
+                      //       const SliverGridDelegateWithFixedCrossAxisCount(
+                      //     crossAxisCount: 3,
+                      //   ),
+                      //   itemCount: 20,
+                      //   itemBuilder: (BuildContext context, int index) {
+                      //     return Padding(
+                      //       padding: const EdgeInsets.all(8.0),
+                      //       child: GestureDetector(
+                      //         onTap: () {
+                      //           followersPosts(context);
+                      //         },
+                      //         child: Container(
+                      //           height: height * 0.1,
+                      //           width: width * 0.1,
+                      //           decoration: BoxDecoration(
+                      //               image: const DecorationImage(
+                      //                   image: AssetImage(
+                      //                       "assets/wheels on the bus ➸ [larry au] - ღ chapter two ღ.jpeg"),
+                      //                   fit: BoxFit.cover),
+                      //               color: Colors.amber,
+                      //               borderRadius: BorderRadius.circular(30)),
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
                     ],
                   ),
                 ),

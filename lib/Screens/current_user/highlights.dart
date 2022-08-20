@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:socio/Widgets/chooseimage.dart';
 import 'package:socio/Widgets/text.dart';
 
-class Stories extends StatelessWidget {
-  const Stories({Key? key}) : super(key: key);
+class HighLights extends StatelessWidget {
+  const HighLights({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,9 @@ class Stories extends StatelessWidget {
             Column(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    choose(context);
+                  },
                   child: Container(
                     height: height * 0.1,
                     width: width * 0.2,
@@ -53,12 +56,11 @@ class Stories extends StatelessWidget {
                             width: width * 0.2,
                             decoration: BoxDecoration(
                                 image: const DecorationImage(
-                                    image: AssetImage("assets/Zayn.jpeg"),
+                                    image: AssetImage("assets/me.jpg"),
                                     fit: BoxFit.cover),
-                                color: Colors.amber,
                                 borderRadius: BorderRadius.circular(30)),
                           ),
-                          text("Stories", Colors.black, height * 0.015,
+                          text("Highlight", Colors.black, height * 0.015,
                               FontWeight.w600),
                         ],
                       ),

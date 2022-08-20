@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/Screens/Bottom/Provider/bottom_provider.dart';
-import 'package:socio/Screens/chat.dart';
-import 'package:socio/Screens/home.dart';
-import 'package:socio/Screens/likes.dart';
-import 'package:socio/Screens/profile.dart';
-import 'package:socio/Screens/search.dart';
+import 'package:socio/Screens/chats%20/chat.dart';
+import 'package:socio/Screens/home%20/home.dart';
+import 'package:socio/Screens/likes/likes.dart';
+import 'package:socio/Screens/current_user/profile.dart';
+import 'package:socio/Screens/search/search.dart';
 
 class Bottom extends StatefulWidget {
   const Bottom({Key? key}) : super(key: key);
@@ -22,18 +22,18 @@ class _BottomState extends State<Bottom> {
     const Likes(),
     const ProfileScreen()
   ];
-  int _currentIndex = 0;
+  // int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    //final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(0.1),
       resizeToAvoidBottomInset: false,
       body: pages[context.watch<BottomProvder>().currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-          //backgroundColor: Colors.amber,
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
           selectedItemColor: Colors.black,
           unselectedItemColor: const Color.fromARGB(96, 14, 14, 14),
           currentIndex: context.watch<BottomProvder>().currentIndex,

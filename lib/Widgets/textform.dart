@@ -4,6 +4,7 @@ InputDecoration textFieldInputDecoration(
   String hintText,
 ) {
   return InputDecoration(
+      contentPadding: const EdgeInsets.all(10),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
       // focusedBorder: InputBorder.,
       // focusColor: Colors.black,

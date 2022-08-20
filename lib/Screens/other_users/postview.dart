@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:socio/Screens/followers_profile.dart';
+import 'package:socio/Screens/other_users/followers_profile.dart';
 import 'package:socio/Widgets/more.dart';
 
 import 'package:socio/Widgets/text.dart';
@@ -38,7 +38,7 @@ class Posts extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (ctx) => FollowersProfile()));
+                                builder: (ctx) => const FollowersProfile()));
                           },
                           child: Container(
                             height: height * 0.05,
@@ -52,18 +52,18 @@ class Posts extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: width * 0.05,
+                          width: width * 0.01,
                         ),
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (ctx) => FollowersProfile()));
+                                builder: (ctx) => const FollowersProfile()));
                           },
-                          child: text("user_name", Colors.white, height * 0.02,
-                              FontWeight.w700),
+                          child: text("harrystyles", Colors.white,
+                              height * 0.02, FontWeight.w700),
                         ),
                         SizedBox(
-                          width: width * 0.05,
+                          width: width * 0.06,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -83,22 +83,6 @@ class Posts extends StatelessWidget {
                                 ))
                           ],
                         ),
-                        // text(
-                        //     "2hours ago",
-                        //     const Color.fromARGB(207, 253, 247, 247),
-                        //     height * 0.01,
-                        //     FontWeight.w400),
-                        // SizedBox(
-                        //   width: width * 0.23,
-                        // ),
-                        // IconButton(
-                        //     onPressed: () {
-                        //       more(context);
-                        //     },
-                        //     icon: const Icon(
-                        //       Icons.more_vert,
-                        //       color: Colors.white,
-                        //     ))
                       ],
                     ),
                   ),
@@ -135,12 +119,16 @@ class Posts extends StatelessWidget {
                             Icons.favorite_border,
                             color: Colors.red,
                           )),
+                      text("1.2K", Colors.white, height * 0.012,
+                          FontWeight.w600),
                       IconButton(
                           onPressed: () {},
                           icon: const Icon(
                             Icons.mode_comment_outlined,
                             color: Colors.white,
-                          ))
+                          )),
+                      text("100  ", Colors.white, height * 0.012,
+                          FontWeight.w600),
                     ],
                   )
                 ],

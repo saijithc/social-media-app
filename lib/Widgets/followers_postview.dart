@@ -3,8 +3,6 @@ import 'package:socio/Widgets/more.dart';
 import 'package:socio/Widgets/options.dart';
 import 'package:socio/Widgets/text.dart';
 
-import '../Screens/followers_profile.dart';
-
 followersPosts(BuildContext context) {
   final height = MediaQuery.of(context).size.height;
   final width = MediaQuery.of(context).size.width;
@@ -61,7 +59,7 @@ followersPosts(BuildContext context) {
                                   FontWeight.w400),
                               IconButton(
                                   onPressed: () {
-                                    options(context);
+                                    more(context);
                                   },
                                   icon: const Icon(
                                     Icons.more_vert,
@@ -69,22 +67,6 @@ followersPosts(BuildContext context) {
                                   ))
                             ],
                           ),
-                          // text(
-                          //     "2hours ago",
-                          //     const Color.fromARGB(207, 253, 247, 247),
-                          //     height * 0.01,
-                          //     FontWeight.w400),
-                          // SizedBox(
-                          //   width: width * 0.23,
-                          // ),
-                          // IconButton(
-                          //     onPressed: () {
-                          //       more(context);
-                          //     },
-                          //     icon: const Icon(
-                          //       Icons.more_vert,
-                          //       color: Colors.white,
-                          //     ))
                         ],
                       ),
                     ),
@@ -122,12 +104,16 @@ followersPosts(BuildContext context) {
                               Icons.favorite_border,
                               color: Colors.red,
                             )),
+                        text("15.2K", Colors.white, height * 0.012,
+                            FontWeight.w600),
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(
                               Icons.mode_comment_outlined,
                               color: Colors.white,
-                            ))
+                            )),
+                        text("500 ", Colors.white, height * 0.012,
+                            FontWeight.w600),
                       ],
                     )
                   ],

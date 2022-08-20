@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:socio/Widgets/text.dart';
 
-class HighLights extends StatelessWidget {
-  const HighLights({Key? key}) : super(key: key);
+class FollowersHighLights extends StatelessWidget {
+  const FollowersHighLights({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,28 +16,30 @@ class HighLights extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(
-              width: width * 0.025,
+              width: width * 0.01,
             ),
-            Column(
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    height: height * 0.1,
-                    width: width * 0.2,
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: height * 0.05,
-                    ),
-                  ),
-                ),
-                text("New", Colors.black, height * 0.015, FontWeight.w600)
-              ],
-            ),
+            // Column(
+            //   children: [
+            //     GestureDetector(
+            //       onTap: () {
+            //         choose(context);
+            //       },
+            //       child: Container(
+            //         height: height * 0.1,
+            //         width: width * 0.2,
+            //         decoration: BoxDecoration(
+            //             color: Colors.black,
+            //             borderRadius: BorderRadius.circular(30)),
+            //         child: Icon(
+            //           Icons.add,
+            //           color: Colors.white,
+            //           size: height * 0.05,
+            //         ),
+            //       ),
+            //     ),
+            //     text("New", Colors.black, height * 0.015, FontWeight.w600)
+            //   ],
+            // ),
             SizedBox(
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -49,11 +51,11 @@ class HighLights extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            height: height * 0.1,
+                            height: height * 0.09,
                             width: width * 0.2,
                             decoration: BoxDecoration(
                                 image: const DecorationImage(
-                                    image: AssetImage("assets/me.jpg"),
+                                    image: AssetImage("assets/_ (4).jpeg"),
                                     fit: BoxFit.cover),
                                 color: Colors.amber,
                                 borderRadius: BorderRadius.circular(30)),

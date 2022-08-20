@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/Screens/Bottom/Provider/bottom_provider.dart';
 import 'package:socio/Screens/Bottom/bottom.dart';
-import 'package:socio/Screens/followers_profile.dart';
-import 'package:socio/Screens/home.dart';
-import 'package:socio/Screens/login.dart';
+import 'package:socio/Screens/login_activities/login.dart';
 
 void main() {
   runApp(const MyApp());

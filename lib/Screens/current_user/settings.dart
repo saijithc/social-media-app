@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:socio/Screens/login_activities/login.dart';
 import 'package:socio/Widgets/text.dart';
 
-import '../Widgets/buttons.dart';
+import '../../Widgets/buttons.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -91,6 +92,10 @@ class Settings extends StatelessWidget {
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.pop(context);
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (ctx) => Login()),
+                                        (route) => false);
                                   },
                                   child: buttons(
                                       height * 0.06,

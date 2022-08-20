@@ -65,17 +65,6 @@ customAlert(BuildContext context) {
                                   ))
                             ],
                           ),
-                          // SizedBox(
-                          //   width: width * 0.18,
-                          // ),
-                          // IconButton(
-                          //     onPressed: () {
-                          //       options(context);
-                          //     },
-                          //     icon: const Icon(
-                          //       Icons.more_vert,
-                          //       color: Colors.white,
-                          //     ))
                         ],
                       ),
                     ),
@@ -112,12 +101,16 @@ customAlert(BuildContext context) {
                               Icons.favorite_border,
                               color: Colors.red,
                             )),
+                        text("1.2K", Colors.white, height * 0.012,
+                            FontWeight.w600),
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(
                               Icons.mode_comment_outlined,
                               color: Colors.white,
-                            ))
+                            )),
+                        text("100  ", Colors.white, height * 0.012,
+                            FontWeight.w600),
                       ],
                     )
                   ],

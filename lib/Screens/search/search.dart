@@ -6,10 +6,11 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
 
     return SafeArea(
         child: Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Padding(
@@ -17,7 +18,7 @@ class SearchScreen extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30),
               child: Container(
-                color: Color.fromARGB(189, 186, 185, 185),
+                color: const Color.fromARGB(189, 186, 185, 185),
                 // height: height * 0.075,
                 child: Column(
                   children: [

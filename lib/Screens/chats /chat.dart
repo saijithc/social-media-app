@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Widgets/text.dart';
+import '../../Widgets/text.dart';
 
 class ChatScreen extends StatelessWidget {
   ChatScreen({Key? key}) : super(key: key);
@@ -11,6 +11,7 @@ class ChatScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Column(
           children: [
             Padding(
@@ -62,7 +63,7 @@ class ChatScreen extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                //physics: NeverScrollableScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 // shrinkWrap: true,
                 itemCount: 50,
                 itemBuilder: (BuildContext context, int index) {
