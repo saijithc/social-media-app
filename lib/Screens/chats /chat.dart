@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:socio/Screens/current_user/provider/theme_mode.dart';
 
 import '../../Widgets/text.dart';
 
@@ -62,37 +64,44 @@ class ChatScreen extends StatelessWidget {
               height: height * 0.01,
             ),
             Expanded(
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                // shrinkWrap: true,
-                itemCount: 50,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      leading: Container(
-                        height: height * 0.065,
-                        width: width * 0.15,
-                        decoration: BoxDecoration(
-                            image: const DecorationImage(
-                                image: AssetImage("assets/Zayn.jpeg"),
-                                fit: BoxFit.cover),
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                      title: text("Zayn_malik", Colors.black, height * 0.02,
-                          FontWeight.w800),
-                      trailing: Container(
-                        height: height * 0.03,
-                        width: width * 0.08,
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(149, 225, 26, 175),
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Center(
-                          child: text("2", Colors.white, height * 0.015,
-                              FontWeight.w600),
+              child: Consumer<ThemeChanger>(
+                builder: (context, value, child) {
+                  return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    // shrinkWrap: true,
+                    itemCount: 50,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          leading: Container(
+                            height: height * 0.065,
+                            width: width * 0.15,
+                            decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    image: AssetImage("assets/Zayn.jpeg"),
+                                    fit: BoxFit.cover),
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
+                          title: text1(
+                            "Zayn_malik",
+                            sizes: height * 0.02,
+                            weight: FontWeight.w800,
+                          ),
+                          trailing: Container(
+                            height: height * 0.03,
+                            width: width * 0.08,
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(149, 225, 26, 175),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Center(
+                              child: text("2", Colors.white, height * 0.015,
+                                  FontWeight.w600, 1),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   );
                 },
               ),

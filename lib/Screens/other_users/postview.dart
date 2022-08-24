@@ -19,19 +19,19 @@ class Posts extends StatelessWidget {
         return Column(
           children: [
             SizedBox(
-              height: height * 0.015,
+              height: height * 0.008,
             ),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 color: Colors.black,
               ),
-              height: height * 0.7,
+              // height: height * 0.7,
               width: width * 0.93,
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(top: 5, bottom: 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -51,28 +51,32 @@ class Posts extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30)),
                           ),
                         ),
-                        SizedBox(
-                          width: width * 0.01,
-                        ),
+                        // SizedBox(
+                        //   width: width * 0.01,
+                        // ),
                         GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (ctx) => const FollowersProfile()));
                           },
                           child: text("harrystyles", Colors.white,
-                              height * 0.02, FontWeight.w700),
+                              height * 0.02, FontWeight.w700, 1),
                         ),
                         SizedBox(
-                          width: width * 0.06,
+                          width: width * 0.1,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             text(
                                 "2hours ago",
                                 const Color.fromARGB(207, 253, 247, 247),
                                 height * 0.01,
-                                FontWeight.w400),
+                                FontWeight.w400,
+                                1),
+                            SizedBox(
+                              width: width * 0.12,
+                            ),
                             IconButton(
                                 onPressed: () {
                                   more(context);
@@ -101,11 +105,16 @@ class Posts extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: height * 0.03,
+                        //height: height * 0.03,
                         width: width * 0.8,
-                        child: ListTile(
-                          leading: text("Love on tour,New York City😋..",
-                              Colors.white, height * 0.014, FontWeight.bold),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: text(
+                              "Love on tour,New York City😋..jhfdkjhkdhdkkdkffhfggkhdfgihkdfg      khjjkdscvhjks ihjkdsxcvn nm iuhdcfvjnbxdcb biuhdfkn hihidfgiihdfghkjhfgdhffhlfhgiejjfdfhkhdkjfggkdfghdkfgdgdfgigurgjeoj",
+                              Colors.white,
+                              height * 0.014,
+                              FontWeight.bold,
+                              2),
                         ),
                       )
                     ],
@@ -120,7 +129,10 @@ class Posts extends StatelessWidget {
                             color: Colors.red,
                           )),
                       text("1.2K", Colors.white, height * 0.012,
-                          FontWeight.w600),
+                          FontWeight.w600, 1),
+                      SizedBox(
+                        width: width * 0.05,
+                      ),
                       IconButton(
                           onPressed: () {},
                           icon: const Icon(
@@ -128,14 +140,14 @@ class Posts extends StatelessWidget {
                             color: Colors.white,
                           )),
                       text("100  ", Colors.white, height * 0.012,
-                          FontWeight.w600),
+                          FontWeight.w600, 1),
                     ],
                   )
                 ],
               ),
             ),
             SizedBox(
-              height: height * 0.02,
+              height: height * 0.01,
             )
           ],
         );
@@ -143,129 +155,3 @@ class Posts extends StatelessWidget {
     );
   }
 }
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:socio/Widgets/text.dart';
-
-// class PostView extends StatelessWidget {
-//   const PostView({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final height = MediaQuery.of(context).size.height;
-//     final width = MediaQuery.of(context).size.width;
-
-//     return Scaffold(
-//       backgroundColor: Colors.transparent,
-//       body: Column(
-//         children: [
-//           Center(
-//             child: Container(
-//               height: height,
-//               width: width,
-//               color: Colors.white.withOpacity(0.1),
-//               child: Center(
-//                 child: Container(
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(25),
-//                     color: Colors.black,
-//                   ),
-//                   height: height * 0.7,
-//                   width: width * 0.9,
-//                   child: Column(
-//                     children: [
-//                       Padding(
-//                         padding: const EdgeInsets.all(8.0),
-//                         child: Row(
-//                           children: [
-//                             Container(
-//                               height: height * 0.05,
-//                               width: width * 0.1,
-//                               decoration: BoxDecoration(
-//                                   image: const DecorationImage(
-//                                       image: AssetImage("assets/me.jpg"),
-//                                       fit: BoxFit.cover),
-//                                   borderRadius: BorderRadius.circular(30)),
-//                             ),
-//                             SizedBox(
-//                               width: width * 0.05,
-//                             ),
-//                             text("your_name", Colors.white, height * 0.02,
-//                                 FontWeight.w700),
-//                             SizedBox(
-//                               width: width * 0.05,
-//                             ),
-//                             text(
-//                                 "2hours ago",
-//                                 const Color.fromARGB(207, 253, 247, 247),
-//                                 height * 0.01,
-//                                 FontWeight.w400),
-//                             SizedBox(
-//                               width: width * 0.18,
-//                             ),
-//                             IconButton(
-//                                 onPressed: () {},
-//                                 icon: const Icon(
-//                                   Icons.more_vert,
-//                                   color: Colors.white,
-//                                 ))
-//                           ],
-//                         ),
-//                       ),
-//                       Center(
-//                         child: Container(
-//                           height: height * 0.5,
-//                           width: width * 0.85,
-//                           decoration: BoxDecoration(
-//                               image: const DecorationImage(
-//                                   image: AssetImage("assets/music.jpeg"),
-//                                   fit: BoxFit.cover),
-//                               borderRadius: BorderRadius.circular(30)),
-//                         ),
-//                       ),
-//                       Row(
-//                         mainAxisAlignment: MainAxisAlignment.start,
-//                         children: [
-//                           SizedBox(
-//                             height: height * 0.05,
-//                             width: width * 0.8,
-//                             child: ListTile(
-//                               leading: text(
-//                                   "Love on tour,New York City😋..",
-//                                   Colors.white,
-//                                   height * 0.014,
-//                                   FontWeight.bold),
-//                             ),
-//                           )
-//                         ],
-//                       ),
-//                       Row(
-//                         mainAxisAlignment: MainAxisAlignment.end,
-//                         children: [
-//                           IconButton(
-//                               onPressed: () {},
-//                               icon: const Icon(
-//                                 Icons.favorite_border,
-//                                 color: Colors.red,
-//                               )),
-//                           IconButton(
-//                               onPressed: () {},
-//                               icon: const Icon(
-//                                 Icons.mode_comment_outlined,
-//                                 color: Colors.white,
-//                               ))
-//                         ],
-//                       )
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

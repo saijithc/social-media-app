@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:socio/Screens/login_activities/login.dart';
+import 'package:socio/Screens/current_user/widget/switch.dart';
+import 'package:socio/Screens/login_activities/view/login.dart';
 import 'package:socio/Widgets/text.dart';
 
 import '../../Widgets/buttons.dart';
@@ -11,41 +12,41 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    // ThemeChanger themeChanger = Provider.of<ThemeChanger>(context);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
-        title: text("Settings", Colors.black, height * 0.021, FontWeight.w800),
+        //backgroundColor: Colors.white,
+        title: text1("Settings", weight: FontWeight.w800),
       ),
       body: Column(
         children: [
           ListTile(
             leading: const Icon(
               Icons.info_outline_rounded,
-              color: Colors.black,
             ),
-            title: text("About", Colors.black, height * 0.02, FontWeight.w800),
+            title: text1("About", weight: FontWeight.w800),
           ),
           ListTile(
             leading: const Icon(
               Icons.color_lens_outlined,
-              color: Colors.black,
+              // color: Colors.black,
             ),
-            title: text("Theme", Colors.black, height * 0.02, FontWeight.w800),
+            title: text1("Theme", weight: FontWeight.w800),
+            trailing: const SwitchScreen(),
           ),
           ListTile(
             leading: const Icon(
               Icons.power_settings_new_sharp,
-              color: Colors.black,
             ),
-            title:
-                text("Log Out", Colors.black, height * 0.02, FontWeight.w800),
+            title: text1("Log Out", weight: FontWeight.w800),
             onTap: () {
               showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      backgroundColor: Colors.white,
+                      // backgroundColor: Colors.white,
                       contentPadding: EdgeInsets.zero,
                       insetPadding: EdgeInsets.only(
                           top: height * 0.25, bottom: height * 0.3),

@@ -1,13 +1,12 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:socio/Screens/Bottom/bottom.dart';
-import 'package:socio/Screens/login_activities/signup.dart';
-import 'package:socio/Widgets/textform.dart';
-
-import '../../Widgets/text.dart';
+import 'package:socio/Screens/login_activities/view/signup.dart';
+import 'package:socio/Screens/login_activities/view/widget/textform.dart';
+import '../../../Widgets/text.dart';
 
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
-
   final TextEditingController numberController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -17,7 +16,6 @@ class Login extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
-      // resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15),
@@ -27,53 +25,42 @@ class Login extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
+                      key: formKey,
+                      child: Column(children: [
                         Container(
                           height: height * 0.4,
                           decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage("assets/sayi (1).jpg"))),
                         ),
-                        TextFormField(
-                            textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                            validator: (val) {
-                              return val!.length == 10
-                                  ? null
-                                  : "please provide a valid Phone number";
-                            },
-                            controller: numberController,
-                            style: simpleTextFieldStyle(Colors.white),
-                            decoration:
-                                textFieldInputDecoration("Phone number")),
+                        Textform(
+                          obscureText: false,
+                          type: TextInputType.number,
+                          hint: "Phone number",
+                          controller: numberController,
+                          validator: (value) {
+                            return value!.length == 10
+                                ? null
+                                : "Please provide a valid Phone number";
+                          },
+                        ),
                         SizedBox(height: height * 0.02),
-                        TextFormField(
-                            textAlign: TextAlign.center,
+                        Textform(
                             obscureText: true,
+                            hint: "Password",
+                            controller: passwordController,
                             validator: (val) {
                               return val!.length >= 6
                                   ? null
                                   : "Password should contain minimum 6 characters";
-                            },
-                            controller: passwordController,
-                            style: simpleTextFieldStyle(Colors.white),
-                            decoration: textFieldInputDecoration("password")),
-                      ],
-                    ),
-                  ),
+                            })
+                      ])),
                   SizedBox(height: height * 0.02),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      text(
-                        "Forgot password ?",
-                        Colors.blue,
-                        height * 0.015,
-                        FontWeight.w600,
-                      )
+                      text("Forgot password ?", Colors.blue, height * 0.015,
+                          FontWeight.w600, 1)
                     ],
                   ),
                   SizedBox(
@@ -87,12 +74,7 @@ class Login extends StatelessWidget {
                             color: Colors.blue.withOpacity(0.5)),
                         width: width,
                         child: Center(
-                            child: text(
-                          "Sign In",
-                          Colors.white,
-                          height * 0.02,
-                          FontWeight.w600,
-                        ))),
+                            child: text1('Sign In', weight: FontWeight.bold))),
                     onTap: () {
                       if (formKey.currentState!.validate()) {
                         Navigator.of(context).push(MaterialPageRoute(
@@ -110,14 +92,20 @@ class Login extends StatelessWidget {
                         height: height * 0.05,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(60),
-                            color: Colors.white),
+                            color: const Color.fromARGB(255, 243, 243, 243)),
                         width: width,
                         child: Center(
-                            child: text(
-                                "Sign In with Google",
-                                const Color.fromARGB(255, 126, 125, 125),
-                                height * 0.02,
-                                FontWeight.w500))),
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset("assets/google-icon.png"),
+                            SizedBox(
+                              width: width * 0.02,
+                            ),
+                            text1("Sign In with Google",
+                                color: Colors.black45, weight: FontWeight.bold),
+                          ],
+                        ))),
                     onTap: () {},
                   ),
                   SizedBox(height: height * 0.05),
@@ -125,20 +113,24 @@ class Login extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      text("Don't have account?", Colors.black, height * 0.02,
-                          FontWeight.w300),
-                      SizedBox(
-                        width: width * 0.02,
-                      ),
-                      InkWell(
-                        child: text("Register now", Colors.blue, height * 0.02,
-                            FontWeight.w700),
-                        onTap: () {
-                          // widget.toggle();
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (ctx) => SignUp()));
-                        },
-                      )
+                      RichText(
+                          text: TextSpan(
+                              text: "Don't have account? ",
+                              style: const TextStyle(color: Colors.black),
+                              children: <TextSpan>[
+                            TextSpan(
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (ctx) => SignUp()));
+                                  },
+                                text: "Register now",
+                                style: const TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold))
+                          ]))
                     ],
                   )
                 ],

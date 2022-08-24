@@ -38,7 +38,11 @@ class Stories extends StatelessWidget {
                     ),
                   ),
                 ),
-                text("New", Colors.black, height * 0.015, FontWeight.w600)
+                text1(
+                  "New",
+                  sizes: height * 0.015,
+                  weight: FontWeight.w600,
+                )
               ],
             ),
             SizedBox(
@@ -60,8 +64,8 @@ class Stories extends StatelessWidget {
                                     fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(30)),
                           ),
-                          text("Stories", Colors.black, height * 0.015,
-                              FontWeight.w600),
+                          text1("Stories",
+                              sizes: height * 0.015, weight: FontWeight.w600),
                         ],
                       ),
                     );

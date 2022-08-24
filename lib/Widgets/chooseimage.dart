@@ -17,7 +17,7 @@ choose(BuildContext context) {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               text("Choose image", Colors.black, height * 0.025,
-                  FontWeight.w800),
+                  FontWeight.w800, 1),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -30,7 +30,7 @@ choose(BuildContext context) {
                             color: Colors.black,
                           )),
                       text("Camera", Colors.black, height * 0.015,
-                          FontWeight.bold)
+                          FontWeight.bold, 1)
                     ],
                   ),
                   Column(
@@ -42,7 +42,7 @@ choose(BuildContext context) {
                             color: Colors.black,
                           )),
                       text("Gallery", Colors.black, height * 0.015,
-                          FontWeight.bold)
+                          FontWeight.bold, 1)
                     ],
                   )
                 ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:socio/Widgets/more.dart';
-import 'package:socio/Widgets/options.dart';
 import 'package:socio/Widgets/text.dart';
 
 followersPosts(BuildContext context) {
@@ -22,12 +21,12 @@ followersPosts(BuildContext context) {
                   borderRadius: BorderRadius.circular(25),
                   color: Colors.black,
                 ),
-                height: height * 0.7,
                 width: width * 0.9,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(top: 5, bottom: 5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -41,22 +40,23 @@ followersPosts(BuildContext context) {
                                     fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(30)),
                           ),
-                          SizedBox(
-                            width: width * 0.05,
-                          ),
                           text("harrystyles", Colors.white, height * 0.02,
-                              FontWeight.w700),
+                              FontWeight.w700, 1),
                           SizedBox(
-                            width: width * 0.05,
+                            width: width * 0.08,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               text(
                                   "2hours ago",
                                   const Color.fromARGB(207, 253, 247, 247),
                                   height * 0.01,
-                                  FontWeight.w400),
+                                  FontWeight.w400,
+                                  1),
+                              SizedBox(
+                                width: width * 0.1,
+                              ),
                               IconButton(
                                   onPressed: () {
                                     more(context);
@@ -86,11 +86,16 @@ followersPosts(BuildContext context) {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: height * 0.03,
+                          // height: height * 0.05,
                           width: width * 0.8,
-                          child: ListTile(
-                            leading: text("Love on tour,New York City😋..",
-                                Colors.white, height * 0.014, FontWeight.bold),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: text(
+                                "Love on tour,New York City😋..jhfdkjhkdhdkkdkffhfggkhdfgihkdfg      khjjkdscvhjks ihjkdsxcvn nm iuhdcfvjnbxdcb biuhdfkn hihidfgiihdfghkjhfgdhffhlfhgiejjfdfhkhdkjfggkdfghdkfgdgdfgigurgjeoj",
+                                Colors.white,
+                                height * 0.014,
+                                FontWeight.bold,
+                                2),
                           ),
                         )
                       ],
@@ -104,16 +109,19 @@ followersPosts(BuildContext context) {
                               Icons.favorite_border,
                               color: Colors.red,
                             )),
-                        text("15.2K", Colors.white, height * 0.012,
-                            FontWeight.w600),
+                        text("1.2K", Colors.white, height * 0.012,
+                            FontWeight.w600, 1),
+                        SizedBox(
+                          width: width * 0.05,
+                        ),
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(
                               Icons.mode_comment_outlined,
                               color: Colors.white,
                             )),
-                        text("500 ", Colors.white, height * 0.012,
-                            FontWeight.w600),
+                        text("100  ", Colors.white, height * 0.012,
+                            FontWeight.w600, 1),
                       ],
                     )
                   ],

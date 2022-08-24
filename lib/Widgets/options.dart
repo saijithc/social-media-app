@@ -23,8 +23,8 @@ options(BuildContext context) {
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.white),
                   child: Center(
-                    child: text(
-                        "Edit", Colors.black, height * 0.02, FontWeight.bold),
+                    child: text("Edit", Colors.black, height * 0.02,
+                        FontWeight.bold, 1),
                   ),
                 ),
                 SizedBox(height: height * 0.02),
@@ -35,8 +35,8 @@ options(BuildContext context) {
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.white),
                   child: Center(
-                    child: text(
-                        "Delete", Colors.black, height * 0.02, FontWeight.bold),
+                    child: text("Delete", Colors.black, height * 0.02,
+                        FontWeight.bold, 1),
                   ),
                 ),
                 SizedBox(height: height * 0.02),
@@ -47,8 +47,8 @@ options(BuildContext context) {
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.white),
                   child: Center(
-                    child: text(
-                        "Share", Colors.black, height * 0.02, FontWeight.bold),
+                    child: text("Share", Colors.black, height * 0.02,
+                        FontWeight.bold, 1),
                   ),
                 )
               ],

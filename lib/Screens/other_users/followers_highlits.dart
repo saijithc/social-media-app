@@ -18,28 +18,6 @@ class FollowersHighLights extends StatelessWidget {
             SizedBox(
               width: width * 0.01,
             ),
-            // Column(
-            //   children: [
-            //     GestureDetector(
-            //       onTap: () {
-            //         choose(context);
-            //       },
-            //       child: Container(
-            //         height: height * 0.1,
-            //         width: width * 0.2,
-            //         decoration: BoxDecoration(
-            //             color: Colors.black,
-            //             borderRadius: BorderRadius.circular(30)),
-            //         child: Icon(
-            //           Icons.add,
-            //           color: Colors.white,
-            //           size: height * 0.05,
-            //         ),
-            //       ),
-            //     ),
-            //     text("New", Colors.black, height * 0.015, FontWeight.w600)
-            //   ],
-            // ),
             SizedBox(
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -57,11 +35,10 @@ class FollowersHighLights extends StatelessWidget {
                                 image: const DecorationImage(
                                     image: AssetImage("assets/_ (4).jpeg"),
                                     fit: BoxFit.cover),
-                                color: Colors.amber,
                                 borderRadius: BorderRadius.circular(30)),
                           ),
-                          text("Highlight", Colors.black, height * 0.015,
-                              FontWeight.w600),
+                          text1("Highlight",
+                              sizes: height * 0.015, weight: FontWeight.w600),
                         ],
                       ),
                     );

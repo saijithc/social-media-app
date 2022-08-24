@@ -38,7 +38,11 @@ class HighLights extends StatelessWidget {
                     ),
                   ),
                 ),
-                text("New", Colors.black, height * 0.015, FontWeight.w600)
+                text1(
+                  "New",
+                  sizes: height * 0.015,
+                  weight: FontWeight.w600,
+                )
               ],
             ),
             SizedBox(
@@ -60,8 +64,8 @@ class HighLights extends StatelessWidget {
                                     fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(30)),
                           ),
-                          text("Highlight", Colors.black, height * 0.015,
-                              FontWeight.w600),
+                          text1("Highlight",
+                              sizes: height * 0.015, weight: FontWeight.w600),
                         ],
                       ),
                     );

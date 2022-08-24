@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:socio/Screens/current_user/highlights.dart';
 import 'package:socio/Screens/current_user/myposts.dart';
+import 'package:socio/Screens/current_user/provider/theme_mode.dart';
 import 'package:socio/Screens/current_user/settings.dart';
 import 'package:socio/Screens/current_user/tags.dart';
 import 'package:socio/Screens/current_user/add_post.dart';
@@ -9,7 +11,6 @@ import 'package:socio/Widgets/text.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -18,22 +19,24 @@ class ProfileScreen extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          excludeHeaderSemantics: true,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (ctx) => const Settings()));
-                },
-                icon: const Icon(
-                  Icons.settings_outlined,
-                  size: 25,
-                ))
-          ],
-          elevation: 0,
-          backgroundColor: const Color.fromARGB(55, 138, 138, 138),
-          title: text(" profile", Colors.black, height * 0.02, FontWeight.bold),
-        ),
+            excludeHeaderSemantics: true,
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) => const Settings()));
+                  },
+                  icon: const Icon(
+                    Icons.settings_outlined,
+                    size: 25,
+                  ))
+            ],
+            elevation: 0,
+            backgroundColor: const Color.fromARGB(55, 138, 138, 138),
+            title: text1(
+              " profile",
+              weight: FontWeight.bold,
+            )),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -63,24 +66,23 @@ class ProfileScreen extends StatelessWidget {
                                   image: const DecorationImage(
                                       image: AssetImage("assets/me.jpg"),
                                       fit: BoxFit.cover),
-                                  color: Colors.amber,
                                   borderRadius: BorderRadius.circular(30)),
                             ),
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            // mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              text("your_name", Colors.black, height * 0.025,
-                                  FontWeight.bold),
+                              text1(
+                                "your_name",
+                                sizes: height * 0.025,
+                                weight: FontWeight.bold,
+                              ),
                               SizedBox(
                                 height: height * 0.01,
                               ),
-                              text(
-                                  "account_type",
-                                  const Color.fromARGB(255, 21, 19, 19),
-                                  height * 0.015,
-                                  FontWeight.w300)
+                              text1("account_type",
+                                  sizes: height * 0.015,
+                                  weight: FontWeight.w300)
                             ],
                           )
                         ],
@@ -96,7 +98,7 @@ class ProfileScreen extends StatelessWidget {
                           onTap: () {},
                           child: buttons(
                               height * 0.06,
-                              width * 0.4,
+                              width * 0.35,
                               height * 0.03,
                               "Edit Profile",
                               const Color.fromARGB(255, 112, 112, 112),
@@ -110,7 +112,7 @@ class ProfileScreen extends StatelessWidget {
                           },
                           child: buttons(
                               height * 0.06,
-                              width * 0.4,
+                              width * 0.35,
                               height * 0.03,
                               "Add Post",
                               const Color.fromARGB(255, 112, 112, 112),
@@ -136,9 +138,9 @@ class ProfileScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               text("101", Colors.white, height * 0.03,
-                                  FontWeight.w600),
+                                  FontWeight.w600, 1),
                               text("Total Post", Colors.white, height * 0.015,
-                                  FontWeight.w500)
+                                  FontWeight.w500, 1)
                             ],
                           ),
                           Column(
@@ -146,9 +148,9 @@ class ProfileScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               text("13K", Colors.white, height * 0.03,
-                                  FontWeight.w600),
+                                  FontWeight.w600, 1),
                               text("Followers", Colors.white, height * 0.015,
-                                  FontWeight.w500)
+                                  FontWeight.w500, 1)
                             ],
                           ),
                           Column(
@@ -156,9 +158,9 @@ class ProfileScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               text("101", Colors.white, height * 0.03,
-                                  FontWeight.w600),
+                                  FontWeight.w600, 1),
                               text("Following", Colors.white, height * 0.015,
-                                  FontWeight.w500)
+                                  FontWeight.w500, 1)
                             ],
                           )
                         ],
@@ -174,25 +176,40 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: height * 0.02,
               ),
-              DefaultTabController(
-                length: 2,
-                child: Column(
-                  children: [
-                    TabBar(
-                      tabs: [
-                        Tab(
-                          icon: Icon(Icons.grid_view_outlined),
+              Consumer<ThemeChanger>(
+                builder: (context, val, child) {
+                  return DefaultTabController(
+                    length: 2,
+                    child: Column(
+                      children: [
+                        TabBar(
+                          tabs: [
+                            Tab(
+                              icon: Icon(
+                                Icons.grid_view_outlined,
+                                color: val.thememode == ThemeMode.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                            Tab(
+                              icon: Icon(
+                                Icons.person_pin_circle_outlined,
+                                color: val.thememode == ThemeMode.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
-                        Tab(
-                          icon: Icon(Icons.person_pin_circle_outlined),
-                        ),
+                        SizedBox(
+                            height: height - 205,
+                            child: const TabBarView(
+                                children: [MyPosts(), TagScreen()]))
                       ],
                     ),
-                    SizedBox(
-                        height: height - 205,
-                        child: TabBarView(children: [MyPosts(), TagScreen()]))
-                  ],
-                ),
+                  );
+                },
               ),
             ],
           ),

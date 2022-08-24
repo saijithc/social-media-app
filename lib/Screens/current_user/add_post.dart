@@ -10,9 +10,6 @@ addPost(BuildContext context) {
       builder: (context) {
         return AlertDialog(
           contentPadding: EdgeInsets.zero,
-          // insetPadding: EdgeInsets.only(
-          //   top: height * 0.15,
-          // ),
           backgroundColor: Colors.black.withOpacity(0.3),
           content: SizedBox(
             height: height * .62,
@@ -24,7 +21,7 @@ addPost(BuildContext context) {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     text("Add Post", Colors.white, height * 0.02,
-                        FontWeight.w800),
+                        FontWeight.w800, 1),
                     SizedBox(height: height * 0.02),
                     GestureDetector(
                       onTap: () {
@@ -71,7 +68,7 @@ addPost(BuildContext context) {
                         color: Colors.white),
                     child: Center(
                       child: text("Discard", Colors.black, height * 0.02,
-                          FontWeight.bold),
+                          FontWeight.bold, 1),
                     ),
                   ),
                   Container(
@@ -81,8 +78,8 @@ addPost(BuildContext context) {
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.white),
                     child: Center(
-                      child: text(
-                          "Post", Colors.black, height * 0.02, FontWeight.bold),
+                      child: text("Post", Colors.black, height * 0.02,
+                          FontWeight.bold, 1),
                     ),
                   ),
                 ],

@@ -24,8 +24,8 @@ more(BuildContext context) {
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.white),
                   child: Center(
-                    child: text(
-                        "Follow", Colors.black, height * 0.02, FontWeight.bold),
+                    child: text("Follow", Colors.black, height * 0.02,
+                        FontWeight.bold, 1),
                   ),
                 ),
                 SizedBox(height: height * 0.02),
@@ -36,8 +36,8 @@ more(BuildContext context) {
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.white),
                   child: Center(
-                    child: text(
-                        "Save", Colors.black, height * 0.02, FontWeight.bold),
+                    child: text("Save", Colors.black, height * 0.02,
+                        FontWeight.bold, 1),
                   ),
                 ),
                 SizedBox(height: height * 0.02),
@@ -48,8 +48,8 @@ more(BuildContext context) {
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.white),
                   child: Center(
-                    child: text(
-                        "Share", Colors.black, height * 0.02, FontWeight.bold),
+                    child: text("Share", Colors.black, height * 0.02,
+                        FontWeight.bold, 1),
                   ),
                 )
               ],

@@ -21,12 +21,13 @@ customAlert(BuildContext context) {
                   borderRadius: BorderRadius.circular(25),
                   color: Colors.black,
                 ),
-                height: height * 0.7,
+                // height: height * 0.685,
                 width: width * 0.9,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.only(top: 5, bottom: 5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -39,22 +40,26 @@ customAlert(BuildContext context) {
                                     fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(30)),
                           ),
-                          SizedBox(
-                            width: width * 0.05,
-                          ),
+                          // SizedBox(
+                          //   width: width * 0.02,
+                          // ),
                           text("your_name", Colors.white, height * 0.02,
-                              FontWeight.w700),
+                              FontWeight.w700, 1),
                           SizedBox(
-                            width: width * 0.05,
+                            width: width * 0.08,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               text(
                                   "2hours ago",
                                   const Color.fromARGB(207, 253, 247, 247),
                                   height * 0.01,
-                                  FontWeight.w400),
+                                  FontWeight.w400,
+                                  1),
+                              SizedBox(
+                                width: width * 0.1,
+                              ),
                               IconButton(
                                   onPressed: () {
                                     options(context);
@@ -83,12 +88,26 @@ customAlert(BuildContext context) {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: height * 0.05,
+                          // height: height * 0.05,
                           width: width * 0.8,
-                          child: ListTile(
-                            leading: text("Love on tour,New York City😋..",
-                                Colors.white, height * 0.014, FontWeight.bold),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: text(
+                                "Love on tour,New York City😋..jhfdkjhkdhdkkdkffhfggkhdfgihkdfg      khjjkdscvhjks ihjkdsxcvn nm iuhdcfvjnbxdcb biuhdfkn hihidfgiihdfghkjhfgdhffhlfhgiejjfdfhkhdkjfggkdfghdkfgdgdfgigurgjeoj",
+                                Colors.white,
+                                height * 0.014,
+                                FontWeight.bold,
+                                2),
                           ),
+                          //  ListTile(
+                          //   title: Expanded(
+                          //     child: text(
+                          //         "Love on tour,New York City😋..jhfdkjhkdhdkkdkffhfggkhdfgihkdfghihidfgiihdfghkjhfgdhffhlfhgiejjfdfhkhdkjfggkdfghdkfgdgdfgigurgjeoj",
+                          //         Colors.white,
+                          //         height * 0.014,
+                          //         FontWeight.bold),
+                          //   ),
+                          // ),
                         )
                       ],
                     ),
@@ -102,7 +121,10 @@ customAlert(BuildContext context) {
                               color: Colors.red,
                             )),
                         text("1.2K", Colors.white, height * 0.012,
-                            FontWeight.w600),
+                            FontWeight.w600, 1),
+                        SizedBox(
+                          width: width * 0.05,
+                        ),
                         IconButton(
                             onPressed: () {},
                             icon: const Icon(
@@ -110,7 +132,7 @@ customAlert(BuildContext context) {
                               color: Colors.white,
                             )),
                         text("100  ", Colors.white, height * 0.012,
-                            FontWeight.w600),
+                            FontWeight.w600, 1),
                       ],
                     )
                   ],
@@ -124,17 +146,3 @@ customAlert(BuildContext context) {
     },
   );
 }
-// AlertDialog(
-//     content: Column(
-//       children: [
-//         Center(
-//           child: Container(
-//             color: Colors.blue,
-//             height: 100,
-//             width: 100,
-//           ),
-//         )
-//       ],
-//     ),
-//     backgroundColor: Colors.amber,
-//   );
