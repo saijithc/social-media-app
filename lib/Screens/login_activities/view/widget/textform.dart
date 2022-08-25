@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:socio/Widgets/textform.dart';
 
-class Textform extends StatelessWidget {
-  const Textform(
+class CustomTextform extends StatelessWidget {
+  const CustomTextform(
       {Key? key,
       required this.hint,
       required this.controller,

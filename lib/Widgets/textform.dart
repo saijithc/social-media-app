@@ -6,15 +6,9 @@ InputDecoration textFieldInputDecoration(String hintText) {
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
     ),
-    // focusedBorder: OutlineInputBorder(
-    //     borderRadius: BorderRadius.circular(30),
-    //     borderSide: BorderSide(color: Colors.black)),
-    // focusedBorder: InputBorder.,
-    // focusColor: Colors.black,
     fillColor: Colors.black.withOpacity(0.1),
     filled: true,
     labelText: hintText,
-    // hintText: hintText,
     labelStyle:
         const TextStyle(color: Colors.black54, fontWeight: FontWeight.w500),
   );
@@ -23,10 +17,3 @@ InputDecoration textFieldInputDecoration(String hintText) {
 TextStyle simpleTextFieldStyle(colors) {
   return TextStyle(color: colors);
 }
-
-
-// InputDecoration(
-//       focusedBorder: const UnderlineInputBorder(
-//           borderSide: BorderSide(color: Colors.white)),
-//       hintText: hintText,
-//       hintStyle: const TextStyle(color: Colors.white));

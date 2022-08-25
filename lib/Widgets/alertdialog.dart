@@ -21,7 +21,6 @@ customAlert(BuildContext context) {
                   borderRadius: BorderRadius.circular(25),
                   color: Colors.black,
                 ),
-                // height: height * 0.685,
                 width: width * 0.9,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,9 +39,6 @@ customAlert(BuildContext context) {
                                     fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(30)),
                           ),
-                          // SizedBox(
-                          //   width: width * 0.02,
-                          // ),
                           text("your_name", Colors.white, height * 0.02,
                               FontWeight.w700, 1),
                           SizedBox(
@@ -99,15 +95,6 @@ customAlert(BuildContext context) {
                                 FontWeight.bold,
                                 2),
                           ),
-                          //  ListTile(
-                          //   title: Expanded(
-                          //     child: text(
-                          //         "Love on tour,New York City😋..jhfdkjhkdhdkkdkffhfggkhdfgihkdfghihidfgiihdfghkjhfgdhffhlfhgiejjfdfhkhdkjfggkdfghdkfgdgdfgigurgjeoj",
-                          //         Colors.white,
-                          //         height * 0.014,
-                          //         FontWeight.bold),
-                          //   ),
-                          // ),
                         )
                       ],
                     ),

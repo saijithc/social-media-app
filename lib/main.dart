@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/Screens/Bottom/Provider/bottom_provider.dart';
-import 'package:socio/Screens/Bottom/bottom.dart';
-import 'package:socio/Screens/current_user/provider/theme_mode.dart';
-import 'package:socio/Screens/current_user/provider/themes.dart';
+import 'package:socio/Screens/login_activities/view/login.dart';
+import 'package:socio/Screens/signup/provider/otp_provider.dart';
+import 'package:socio/Screens/signup/view/otp.dart';
+import 'package:socio/Screens/theme/theme_mode.dart';
+import 'package:socio/Screens/theme/themes.dart';
+import 'package:socio/Screens/login_activities/provider/provider.dart';
+import 'package:socio/Screens/signup/provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // final prefs = await SharedPreferences.getInstance();
+
   runApp(const MyApp());
 }
 
@@ -17,6 +24,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => LoginProvider()),
+        ChangeNotifierProvider(create: (_) => OtpProvider()),
+        ChangeNotifierProvider(create: (_) => SignupProvider()),
         ChangeNotifierProvider(create: (_) => BottomProvder()),
         ChangeNotifierProvider(create: (_) => ThemeChanger()),
       ],
@@ -38,7 +48,7 @@ class MaterialAppWithTheme extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: context.watch<ThemeChanger>().thememode,
-      home: const Bottom(),
+      home: const OtpScreen(),
     );
   }
 }

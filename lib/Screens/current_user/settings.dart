@@ -95,7 +95,7 @@ class Settings extends StatelessWidget {
                                     Navigator.pop(context);
                                     Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
-                                            builder: (ctx) => Login()),
+                                            builder: (ctx) => const Login()),
                                         (route) => false);
                                   },
                                   child: buttons(

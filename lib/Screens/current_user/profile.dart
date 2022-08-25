@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/Screens/current_user/highlights.dart';
 import 'package:socio/Screens/current_user/myposts.dart';
-import 'package:socio/Screens/current_user/provider/theme_mode.dart';
+import 'package:socio/Screens/theme/theme_mode.dart';
 import 'package:socio/Screens/current_user/settings.dart';
 import 'package:socio/Screens/current_user/tags.dart';
 import 'package:socio/Screens/current_user/add_post.dart';

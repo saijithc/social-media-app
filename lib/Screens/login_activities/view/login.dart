@@ -1,15 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:socio/Screens/Bottom/bottom.dart';
-import 'package:socio/Screens/login_activities/view/signup.dart';
+import 'package:provider/provider.dart';
+import 'package:socio/Screens/login_activities/provider/provider.dart';
+import 'package:socio/Screens/signup/view/signup.dart';
 import 'package:socio/Screens/login_activities/view/widget/textform.dart';
 import '../../../Widgets/text.dart';
 
 class Login extends StatelessWidget {
-  Login({Key? key}) : super(key: key);
-  final TextEditingController numberController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  const Login({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -24,37 +22,42 @@ class Login extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Form(
-                      key: formKey,
-                      child: Column(children: [
-                        Container(
-                          height: height * 0.4,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage("assets/sayi (1).jpg"))),
-                        ),
-                        Textform(
-                          obscureText: false,
-                          type: TextInputType.number,
-                          hint: "Phone number",
-                          controller: numberController,
-                          validator: (value) {
-                            return value!.length == 10
-                                ? null
-                                : "Please provide a valid Phone number";
-                          },
-                        ),
-                        SizedBox(height: height * 0.02),
-                        Textform(
-                            obscureText: true,
-                            hint: "Password",
-                            controller: passwordController,
-                            validator: (val) {
-                              return val!.length >= 6
-                                  ? null
-                                  : "Password should contain minimum 6 characters";
-                            })
-                      ])),
+                  Consumer<LoginProvider>(
+                    builder: (context, values, child) {
+                      return Form(
+                          key: values.formKey,
+                          child: Column(children: [
+                            Container(
+                              height: height * 0.4,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image:
+                                          AssetImage("assets/sayi (1).jpg"))),
+                            ),
+                            CustomTextform(
+                              obscureText: false,
+                              type: TextInputType.number,
+                              hint: "Phone number",
+                              controller: values.numberController,
+                              validator: (value) {
+                                return value!.length == 10
+                                    ? null
+                                    : "Please provide a valid Phone number";
+                              },
+                            ),
+                            SizedBox(height: height * 0.02),
+                            CustomTextform(
+                                obscureText: true,
+                                hint: "Password",
+                                controller: values.passwordController,
+                                validator: (val) {
+                                  return val!.length >= 6
+                                      ? null
+                                      : "Password should contain minimum 6 characters";
+                                })
+                          ]));
+                    },
+                  ),
                   SizedBox(height: height * 0.02),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -76,12 +79,7 @@ class Login extends StatelessWidget {
                         child: Center(
                             child: text1('Sign In', weight: FontWeight.bold))),
                     onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) => const Bottom()));
-                        passwordController.clear();
-                        numberController.clear();
-                      }
+                      context.read<LoginProvider>().validation(context);
                     },
                   ),
                   SizedBox(
@@ -123,7 +121,7 @@ class Login extends StatelessWidget {
                                   ..onTap = () {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
-                                            builder: (ctx) => SignUp()));
+                                            builder: (ctx) => const SignUp()));
                                   },
                                 text: "Register now",
                                 style: const TextStyle(

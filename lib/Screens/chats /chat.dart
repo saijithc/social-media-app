@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socio/Screens/current_user/provider/theme_mode.dart';
+import 'package:socio/Screens/theme/theme_mode.dart';
 
 import '../../Widgets/text.dart';
 
@@ -88,6 +88,7 @@ class ChatScreen extends StatelessWidget {
                             sizes: height * 0.02,
                             weight: FontWeight.w800,
                           ),
+                          subtitle: text1("Last seen"),
                           trailing: Container(
                             height: height * 0.03,
                             width: width * 0.08,

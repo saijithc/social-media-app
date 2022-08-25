@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socio/Screens/current_user/provider/theme_mode.dart';
+import 'package:socio/Screens/theme/theme_mode.dart';
 
 class SwitchScreen extends StatelessWidget {
   const SwitchScreen({Key? key}) : super(key: key);

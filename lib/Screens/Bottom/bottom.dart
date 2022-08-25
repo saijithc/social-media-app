@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/Screens/Bottom/Provider/bottom_provider.dart';
 import 'package:socio/Screens/chats%20/chat.dart';
-import 'package:socio/Screens/current_user/provider/theme_mode.dart';
+import 'package:socio/Screens/theme/theme_mode.dart';
 import 'package:socio/Screens/home%20/home.dart';
 import 'package:socio/Screens/likes/likes.dart';
 import 'package:socio/Screens/current_user/profile.dart';
