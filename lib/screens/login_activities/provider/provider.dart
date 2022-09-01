@@ -10,7 +10,7 @@ class LoginProvider extends ChangeNotifier {
   final TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   bool loading = false;
-  bool visibility = false;
+  bool visibility = true;
   validation(context) {
     if (formKey.currentState!.validate()) {
       loading = true;
@@ -18,7 +18,7 @@ class LoginProvider extends ChangeNotifier {
       final user = LoginUser(
           email: emailController.text.trim(),
           passWord: passwordController.text.trim());
-      Auth().signmIn(user, context).then((value) {
+      Auth().signIn(user, context).then((value) {
         loading = false;
         notifyListeners();
         if (value) {

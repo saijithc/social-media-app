@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:socio/screens/other_users/provider/provider.dart';
 import 'package:socio/widgets/followers_postview.dart';
 
-class FollowersPost extends StatelessWidget {
+class FollowersPost extends StatefulWidget {
   const FollowersPost({Key? key}) : super(key: key);
+
+  @override
+  State<FollowersPost> createState() => _FollowersPostState();
+}
+
+class _FollowersPostState extends State<FollowersPost> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<FollowersProvider>().setPMode(context);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    context.read<FollowersProvider>().pCount = 20;
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,

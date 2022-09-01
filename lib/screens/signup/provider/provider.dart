@@ -16,7 +16,7 @@ class SignupProvider with ChangeNotifier {
 
   final formKey = GlobalKey<FormState>();
   bool loadining = false;
-  bool visibility = false;
+  bool visibility = true;
   validation(context) {
     if (formKey.currentState!.validate()) {
       loadining = true;
@@ -38,13 +38,6 @@ class SignupProvider with ChangeNotifier {
                   )));
         } else {
           log("Something went wrong");
-          // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          //   behavior: SnackBarBehavior.floating,
-          //   margin: const EdgeInsets.all(20),
-          //   padding: const EdgeInsets.all(15),
-          //   content: text1("Something went wrong "),
-          //   duration: const Duration(seconds: 2),
-          // ));
         }
       });
     }

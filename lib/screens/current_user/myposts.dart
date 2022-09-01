@@ -1,15 +1,35 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:socio/screens/current_user/provider/provider.dart';
 
 import 'package:socio/widgets/alertdialog.dart';
 
-class MyPosts extends StatelessWidget {
+class MyPosts extends StatefulWidget {
   const MyPosts({Key? key}) : super(key: key);
+
+  @override
+  State<MyPosts> createState() => _MyPostsState();
+}
+
+class _MyPostsState extends State<MyPosts> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => context.read<CurrentUserProvider>().setPMode(context));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    log('PROFILE BUILDED');
+    context.read<CurrentUserProvider>().pCount = 20;
     return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
       ),

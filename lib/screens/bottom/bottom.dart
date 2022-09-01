@@ -22,7 +22,7 @@ class _BottomState extends State<Bottom> {
     ChatScreen(),
     SearchScreen(),
     const Likes(),
-    const ProfileScreen()
+    ProfileScreen()
   ];
   // int _currentIndex = 0;
   @override

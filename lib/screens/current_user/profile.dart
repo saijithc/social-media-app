@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/current_user/myposts.dart';
+import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/current_user/settings.dart';
 import 'package:socio/widgets/buttons.dart';
 import 'package:socio/widgets/text.dart';
@@ -10,12 +13,36 @@ import 'add_post.dart';
 import 'highlights.dart';
 import 'tags.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+  @override
+  void initState() {
+    final provider = context.read<CurrentUserProvider>();
+    tabController = TabController(length: 2, vsync: this);
+    tabController.addListener(() {
+      log('called');
+      if (tabController.index == 0) {
+        // provider.setPMode(context);
+      } else {
+        provider.setTMode(context);
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -179,36 +206,38 @@ class ProfileScreen extends StatelessWidget {
               ),
               Consumer<ThemeChanger>(
                 builder: (context, val, child) {
-                  return DefaultTabController(
-                    length: 2,
-                    child: Column(
-                      children: [
-                        TabBar(
-                          tabs: [
-                            Tab(
-                              icon: Icon(
-                                Icons.grid_view_outlined,
-                                color: val.thememode == ThemeMode.dark
-                                    ? Colors.white
-                                    : Colors.black,
-                              ),
+                  return Column(
+                    children: [
+                      TabBar(
+                        controller: tabController,
+                        tabs: [
+                          Tab(
+                            icon: Icon(
+                              Icons.grid_view_outlined,
+                              color: val.thememode == ThemeMode.dark
+                                  ? Colors.white
+                                  : Colors.black,
                             ),
-                            Tab(
-                              icon: Icon(
-                                Icons.person_pin_circle_outlined,
-                                color: val.thememode == ThemeMode.dark
-                                    ? Colors.white
-                                    : Colors.black,
-                              ),
+                          ),
+                          Tab(
+                            icon: Icon(
+                              Icons.person_pin_circle_outlined,
+                              color: val.thememode == ThemeMode.dark
+                                  ? Colors.white
+                                  : Colors.black,
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                            height: height - 205,
-                            child: const TabBarView(
-                                children: [MyPosts(), TagScreen()]))
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                          height: context
+                                  .watch<CurrentUserProvider>()
+                                  .tabViewheight ??
+                              0,
+                          child: TabBarView(
+                              controller: tabController,
+                              children: const [MyPosts(), TagScreen()]))
+                    ],
                   );
                 },
               ),

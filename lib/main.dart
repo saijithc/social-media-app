@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socio/helperfunction/helper_function.dart';
 import 'package:socio/screens/bottom/bottom.dart';
+import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/login_activities/view/login.dart';
+import 'package:socio/screens/other_users/provider/provider.dart';
 import 'package:socio/screens/theme/themes.dart';
 
 import 'screens/bottom/Provider/bottom_provider.dart';
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider(create: (_) => BottomProvder()),
       ChangeNotifierProvider(create: (_) => ThemeChanger()),
       ChangeNotifierProvider(create: (_) => HelperFuction()),
+      ChangeNotifierProvider(create: (_) => CurrentUserProvider()),
+      ChangeNotifierProvider(create: (_) => FollowersProvider()),
     ], child: ThemedApp(isLogged: isLogged));
   }
 }

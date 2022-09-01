@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:socio/screens/google/model/model.dart';
 import '../helperfunction/helper_function.dart';
 import '../screens/login_activities/model/login_model.dart';
 import '../screens/signup/model_class/model.dart';
@@ -42,7 +43,7 @@ class Auth {
     return false;
   }
 
-  Future<bool> signmIn(LoginUser user, BuildContext context) async {
+  Future<bool> signIn(LoginUser user, BuildContext context) async {
     try {
       Response response = await Dio().post(
           "https://tailus-api-gateway.herokuapp.com/api/v1/auth/signin",
@@ -70,6 +71,24 @@ class Auth {
         content: Text(e.response!.data['error']),
         duration: const Duration(seconds: 2),
       ));
+    }
+    return false;
+  }
+
+  Future<bool> googleSignup(GoogleAccount account, BuildContext context) async {
+    try {
+      Response response = await Dio().post(
+          "https://tailus-api-gateway.herokuapp.com/api/v1/auth/googleSignup",
+          data: account.toJson());
+      if (response.statusCode! >= 200 && response.statusCode! <= 299) {
+        HelperFuction.saveUserLogged(true);
+        log(response.toString());
+        log(response.data.toString());
+        return true;
+      }
+      log(response.statusCode.toString());
+    } on DioError catch (e) {
+      log(e.response!.data['error']);
     }
     return false;
   }

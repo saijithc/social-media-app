@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:socio/screens/other_users/provider/provider.dart';
+import 'package:socio/screens/other_users/tag.dart';
 import 'package:socio/screens/theme/theme_mode.dart';
 import 'package:socio/screens/current_user/tags.dart';
 import 'package:socio/screens/other_users/followers_highlits.dart';
@@ -7,8 +9,28 @@ import 'package:socio/screens/other_users/followers_post.dart';
 import 'package:socio/widgets/buttons.dart';
 import 'package:socio/widgets/text.dart';
 
-class FollowersProfile extends StatelessWidget {
+class FollowersProfile extends StatefulWidget {
   const FollowersProfile({Key? key}) : super(key: key);
+
+  @override
+  State<FollowersProfile> createState() => _FollowersProfileState();
+}
+
+class _FollowersProfileState extends State<FollowersProfile>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+  @override
+  void initState() {
+    final provider = context.read<FollowersProvider>();
+    tabController = TabController(length: 2, vsync: this);
+    tabController.addListener(() {
+      if (tabController.index == 0) {
+      } else {
+        provider.setTMode(context);
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,37 +160,39 @@ class FollowersProfile extends StatelessWidget {
                         ),
                         Consumer<ThemeChanger>(
                           builder: (context, val, child) {
-                            return DefaultTabController(
-                              length: 2,
-                              child: Column(
-                                children: [
-                                  TabBar(tabs: [
-                                    Tab(
-                                      icon: Icon(
-                                        Icons.grid_view_outlined,
-                                        color: val.thememode == ThemeMode.dark
-                                            ? Colors.white
-                                            : Colors.black,
-                                      ),
+                            return Column(
+                              children: [
+                                TabBar(controller: tabController, tabs: [
+                                  Tab(
+                                    icon: Icon(
+                                      Icons.grid_view_outlined,
+                                      color: val.thememode == ThemeMode.dark
+                                          ? Colors.white
+                                          : Colors.black,
                                     ),
-                                    Tab(
-                                      icon: Icon(
-                                        Icons.person_pin_circle_outlined,
-                                        color: val.thememode == ThemeMode.dark
-                                            ? Colors.white
-                                            : Colors.black,
-                                      ),
-                                    ),
-                                  ]),
-                                  SizedBox(
-                                    height: height - 120,
-                                    child: const TabBarView(children: [
-                                      FollowersPost(),
-                                      TagScreen()
-                                    ]),
                                   ),
-                                ],
-                              ),
+                                  Tab(
+                                    icon: Icon(
+                                      Icons.person_pin_circle_outlined,
+                                      color: val.thememode == ThemeMode.dark
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                ]),
+                                SizedBox(
+                                  height: context
+                                          .watch<FollowersProvider>()
+                                          .tabviewHeight ??
+                                      0,
+                                  child: TabBarView(
+                                      controller: tabController,
+                                      children: const [
+                                        FollowersPost(),
+                                        FollowersTagScreen()
+                                      ]),
+                                ),
+                              ],
                             );
                           },
                         ),

@@ -9,7 +9,7 @@ class FollowersHighLights extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: height * 0.12,
+      height: height * 0.13,
       width: width,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -37,6 +37,7 @@ class FollowersHighLights extends StatelessWidget {
                                     fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(30)),
                           ),
+                          const SizedBox(height: 5),
                           text1("Highlight",
                               sizes: height * 0.015, weight: FontWeight.w600),
                         ],

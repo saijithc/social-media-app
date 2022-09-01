@@ -3,17 +3,18 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
+import 'package:socio/screens/other_users/provider/provider.dart';
 import 'package:socio/widgets/alertdialog.dart';
 
-class TagScreen extends StatelessWidget {
-  const TagScreen({Key? key}) : super(key: key);
+class FollowersTagScreen extends StatelessWidget {
+  const FollowersTagScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     log('tAG BUILDED');
-    context.read<CurrentUserProvider>().tCount = 11;
+    context.read<FollowersProvider>().tCount = 11;
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
