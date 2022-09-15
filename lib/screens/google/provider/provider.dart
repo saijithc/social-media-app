@@ -27,24 +27,10 @@ class GoogleProvider with ChangeNotifier {
             notifyListeners();
             if (value) {
               customSnackBar(context, "SUCESS");
-              // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              //   behavior: SnackBarBehavior.floating,
-              //   margin: EdgeInsets.all(20),
-              //   padding: EdgeInsets.all(15),
-              //   content: Text("SUCESS"),
-              //   duration: Duration(seconds: 2),
-              // ));
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (ctx) => const Bottom()));
             } else {
               customSnackBar(context, "something went wrong");
-              // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              //   behavior: SnackBarBehavior.floating,
-              //   margin: EdgeInsets.all(20),
-              //   padding: EdgeInsets.all(15),
-              //   content: Text("something went wrong"),
-              //   duration: Duration(seconds: 2),
-              // ));
               log("something went wrong");
             }
           });
@@ -52,13 +38,6 @@ class GoogleProvider with ChangeNotifier {
       });
     } catch (e) {
       customSnackBar(context, e.toString());
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //   behavior: SnackBarBehavior.floating,
-      //   margin: const EdgeInsets.all(20),
-      //   padding: const EdgeInsets.all(15),
-      //   content: Text(e.toString()),
-      //   duration: const Duration(seconds: 2),
-      // ));
       log(e.toString());
     }
   }

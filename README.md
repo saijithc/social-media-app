@@ -1,16 +1,29 @@
-# socio
+# Tailus
 
-A new Flutter project.
+Tailus is a Social media App Using Node-Js as Backend, and
+used Provider as Statemanagement ,using MVC folder
+structure, used DIO for access API-method's , the app Starts
+with an authentication using both Password and using OTP,
+Email , Google sign- up etc..
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Light/dark mode toggle
+- Used MVC architectural pattern and Provider as state
+  management, Dio used for calling API-methods, Node.js as
+  backend
+- Users can add stories, share, comment, like, and save the
+  posts.
+- Users can interact with each other using chat and video
+  call .
 
-A few resources to get you started if this is your first Flutter project:
+## Packages used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- provider
+- shared_preferences
+- pin_code_fields
+- google_sign_in
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Statemanagement
+
+- Provider
