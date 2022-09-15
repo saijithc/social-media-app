@@ -45,6 +45,7 @@ addPost(BuildContext context) {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        style: const TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                             hintText: "add caption",
                             fillColor: Colors.white,

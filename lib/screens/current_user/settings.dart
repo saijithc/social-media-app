@@ -70,9 +70,7 @@ class Settings extends StatelessWidget {
                                     fontSize: 20, fontWeight: FontWeight.w800),
                               ),
                             ),
-                            SizedBox(
-                              height: height * 0.08,
-                            ),
+                            SizedBox(height: height * 0.08),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -65,6 +65,7 @@ class Posts extends StatelessWidget {
                           width: width * 0.1,
                         ),
                         Row(
+                          mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             text(
@@ -73,9 +74,9 @@ class Posts extends StatelessWidget {
                                 height * 0.01,
                                 FontWeight.w400,
                                 1),
-                            SizedBox(
-                              width: width * 0.12,
-                            ),
+                            // SizedBox(
+                            //   width: width * 0.1,
+                            // ),
                             IconButton(
                                 onPressed: () {
                                   more(context);

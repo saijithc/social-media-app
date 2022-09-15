@@ -19,8 +19,8 @@ class SignupProvider with ChangeNotifier {
   bool visibility = true;
   validation(context) {
     if (formKey.currentState!.validate()) {
-      loadining = true;
-      notifyListeners();
+      // loadining = true;
+      // notifyListeners();
       final user = User(
           username: userNameController.text.trim(),
           fullname: fullNameController.text.trim(),
@@ -28,18 +28,23 @@ class SignupProvider with ChangeNotifier {
           password: passwordController.text.trim(),
           confirmpssword: confirmPasswordController.text.trim(),
           phoneNumber: numberController.text.trim());
-      Auth().signupFunction(user, context).then((value) {
-        loadining = false;
+      if (loadining != true) {
+        log("Fuction called");
+        loadining = true;
         notifyListeners();
-        if (value) {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (ctx) => OtpScreen(
-                    user: user,
-                  )));
-        } else {
-          log("Something went wrong");
-        }
-      });
+        Auth().signupFunction(user, context).then((value) {
+          loadining = false;
+          notifyListeners();
+          if (value) {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctx) => OtpScreen(
+                      user: user,
+                    )));
+          } else {
+            log("Something went wrong");
+          }
+        });
+      }
     }
   }
 

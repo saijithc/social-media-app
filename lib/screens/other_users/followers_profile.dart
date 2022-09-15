@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:socio/screens/other_users/provider/provider.dart';
 import 'package:socio/screens/other_users/tag.dart';
 import 'package:socio/screens/theme/theme_mode.dart';
-import 'package:socio/screens/current_user/tags.dart';
 import 'package:socio/screens/other_users/followers_highlits.dart';
 import 'package:socio/screens/other_users/followers_post.dart';
 import 'package:socio/widgets/buttons.dart';

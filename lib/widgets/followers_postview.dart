@@ -46,6 +46,7 @@ followersPosts(BuildContext context) {
                             width: width * 0.08,
                           ),
                           Row(
+                            mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               text(
@@ -54,9 +55,9 @@ followersPosts(BuildContext context) {
                                   height * 0.01,
                                   FontWeight.w400,
                                   1),
-                              SizedBox(
-                                width: width * 0.1,
-                              ),
+                              // SizedBox(
+                              //   width: width * 0.1,
+                              // ),
                               IconButton(
                                   onPressed: () {
                                     more(context);
