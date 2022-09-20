@@ -6,13 +6,15 @@ import '../../login_activities/view/login.dart';
 
 class SplashProvider with ChangeNotifier {
   Future gotoHome(BuildContext context, isLogged) async {
+    final token = await HelperFuction.getToken();
+    // log("token called" + token);
     if (HelperFuction.value == 2) {
       Timer(
           const Duration(seconds: 4),
           () => Navigator.of(context)
                   .pushReplacement(MaterialPageRoute(
                       builder: (ctx) =>
-                          isLogged ? const Bottom() : const Login()))
+                          token != null ? const Bottom() : const Login()))
                   .then((value) {
                 HelperFuction.value = 0;
               }));

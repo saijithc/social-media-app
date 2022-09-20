@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "659968766022",
+    "project_id": "tailus-25d5e",
+    "storage_bucket": "tailus-25d5e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659968766022:android:f4b80a25da68a72aca1a47",
+        "android_client_info": {
+          "package_name": "com.example.tailus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659968766022-bjga8kaub31b0na6ch6tk9qp52rrd064.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWM6bkBgq9V9s6w3YT1IlD2LF8g1ylz9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "659968766022-bjga8kaub31b0na6ch6tk9qp52rrd064.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

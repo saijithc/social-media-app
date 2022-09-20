@@ -136,7 +136,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                         ),
                         GestureDetector(
                           onTap: () {
-                            addPost(context);
+                            context.read<CurrentUserProvider>().image = null;
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (ctx) => const AddPost()));
                           },
                           child: buttons(
                               height * 0.06,

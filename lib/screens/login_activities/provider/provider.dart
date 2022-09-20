@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:socio/screens/bottom/bottom.dart';
 import 'package:socio/screens/login_activities/model/login_model.dart';
 import 'package:socio/services/authentication.dart';
+import 'package:socio/widgets/custom_snackbar.dart';
 
 class LoginProvider extends ChangeNotifier {
   final TextEditingController forgotEmailController = TextEditingController();
@@ -24,15 +25,16 @@ class LoginProvider extends ChangeNotifier {
         loading = true;
         notifyListeners();
         log("function called");
-        Auth().signIn(user, context).then((value) {
+        Auth().signIn(user).then((value) {
           loading = false;
           notifyListeners();
-          if (value) {
+          if (value == "sucess") {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (ctx) => const Bottom()));
             emailController.clear();
             passwordController.clear();
           } else {
+            customSnackBar(context, value!);
             log("something went wrong");
           }
         });

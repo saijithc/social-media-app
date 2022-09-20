@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:socio/screens/signup/model_class/model.dart';
 import 'package:socio/services/authentication.dart';
+import 'package:socio/widgets/custom_snackbar.dart';
 import '../view/otp.dart';
 
 class SignupProvider with ChangeNotifier {
@@ -19,8 +20,6 @@ class SignupProvider with ChangeNotifier {
   bool visibility = true;
   validation(context) {
     if (formKey.currentState!.validate()) {
-      // loadining = true;
-      // notifyListeners();
       final user = User(
           username: userNameController.text.trim(),
           fullname: fullNameController.text.trim(),
@@ -32,16 +31,19 @@ class SignupProvider with ChangeNotifier {
         log("Fuction called");
         loadining = true;
         notifyListeners();
-        Auth().signupFunction(user, context).then((value) {
+        Auth().signupFunction(user).then((value) {
           loadining = false;
           notifyListeners();
-          if (value) {
+          if (value == "sucess") {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (ctx) => OtpScreen(
                       user: user,
                     )));
           } else {
+            loadining = false;
+            notifyListeners();
             log("Something went wrong");
+            customSnackBar(context, value!);
           }
         });
       }

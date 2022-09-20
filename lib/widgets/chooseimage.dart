@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/widgets/text.dart';
 
 choose(BuildContext context) {
@@ -24,7 +27,12 @@ choose(BuildContext context) {
                   Column(
                     children: [
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context
+                                .read<CurrentUserProvider>()
+                                .pickImageFromCamera(ImageSource.camera);
+                            Navigator.pop(context);
+                          },
                           icon: const Icon(
                             Icons.linked_camera_outlined,
                             color: Colors.black,
@@ -36,7 +44,12 @@ choose(BuildContext context) {
                   Column(
                     children: [
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context
+                                .read<CurrentUserProvider>()
+                                .pickImageFromCamera(ImageSource.gallery);
+                            Navigator.pop(context);
+                          },
                           icon: const Icon(
                             Icons.image_outlined,
                             color: Colors.black,

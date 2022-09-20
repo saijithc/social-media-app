@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:socio/helperfunction/helper_function.dart';
 import 'package:socio/screens/bottom/bottom.dart';
 import 'package:socio/screens/signup/model_class/model.dart';
 import 'package:socio/services/authentication.dart';
+import 'package:socio/widgets/custom_snackbar.dart';
 
 class OtpProvider with ChangeNotifier {
   bool loadining = false;
@@ -14,12 +14,17 @@ class OtpProvider with ChangeNotifier {
       log("Otp message");
       loadining = true;
       notifyListeners();
-      Auth().otpVerificatioin(context, user, otp).then((value) {
-        if (value) {
-          HelperFuction.saveUserLogged(true);
+      Auth().otpVerificatioin(user, otp).then((value) {
+        if (value == "sucess") {
+          loadining = false;
+          notifyListeners();
+          // HelperFuction.saveUserLogged(true);
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (ctx) => const Bottom()));
         }
+        loadining = false;
+        notifyListeners();
+        customSnackBar(context, value!);
       });
     }
 

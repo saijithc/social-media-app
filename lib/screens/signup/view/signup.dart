@@ -9,7 +9,6 @@ import '../../../widgets/text.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -176,7 +175,7 @@ class SignUp extends StatelessWidget {
                             ],
                           ))),
                       onTap: () {
-                        context.read<GoogleProvider>().signIn(context);
+                        context.read<GoogleProvider>().signIn(context, 1);
                       }),
                   SizedBox(height: height * 0.02),
                   Row(

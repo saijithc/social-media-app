@@ -1,39 +1,51 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:socio/screens/current_user/profile.dart';
 import 'package:socio/screens/google/model/model.dart';
 import 'package:socio/services/authentication.dart';
 import 'package:socio/widgets/custom_snackbar.dart';
 import '../../bottom/bottom.dart';
 
 class GoogleProvider with ChangeNotifier {
-  Future signIn(context) async {
+  signIn(context, int count) {
     try {
       log("function called");
-      // final googleUser = await GoogleSignIn().signIn();
-      // log('after calling signin');
-      // if (googleUser == null) return;
-      // final googleAuth = await googleUser.authentication;
-      // log('saijith' + googleAuth.idToken.toString());
-      await GoogleSignInApi.login()?.then((value) {
+      GoogleSignInApi.login().then((value) {
         log("after login");
         if (value != null) {
           final account = GoogleAccount(
-              email: value.email.trim(),
+              email: value.email,
               passWord: value.id,
               fullname: value.displayName!);
-          Auth().googleSignup(account).then((value) {
-            //loading = false;
-            notifyListeners();
-            if (value) {
-              customSnackBar(context, "SUCESS");
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (ctx) => const Bottom()));
-            } else {
-              customSnackBar(context, "something went wrong");
-              log("something went wrong");
-            }
-          });
+          log(account.toString());
+          if (count == 1) {
+            Auth().googleSignup(account).then((value) {
+              if (value == "SUCESS") {
+                customSnackBar(context, "SUCESS");
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (ctx) => const Bottom()));
+              } else {
+                customSnackBar(context, value.toString());
+                log("something went wrong");
+              }
+            });
+          } else {
+            final account = GoogleLogin(
+              email: value.email,
+              passWord: value.id,
+            );
+            Auth().signIn(account).then((value) {
+              if (value == "sucess") {
+                customSnackBar(context, value!);
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (ctx) => const Bottom()));
+              } else {
+                customSnackBar(context, value.toString());
+                log("something went wrong");
+              }
+            });
+          }
         }
       });
     } catch (e) {
@@ -44,17 +56,23 @@ class GoogleProvider with ChangeNotifier {
 }
 
 class GoogleSignInApi {
-  static final _googleSignIn = GoogleSignIn();
-  static Future<GoogleSignInAccount?>? login() {
+  static final _googleSignIn = GoogleSignIn(
+    scopes: <String>['email'],
+  );
+  static Future<GoogleSignInAccount?> login() async {
     try {
       log('hei sai');
-      return _googleSignIn.signIn().then((value) {
-        log('signin working');
-        log(value!.email.toString());
-      });
+      final credential = await _googleSignIn.signIn();
+      log(credential!.email.toString());
+      log(credential.displayName!);
+      return credential;
     } catch (e) {
       log(e.toString());
     }
     return null;
+  }
+
+  static logout() {
+    _googleSignIn.signOut();
   }
 }

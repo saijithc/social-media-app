@@ -148,7 +148,7 @@ class Login extends StatelessWidget {
                             ],
                           ))),
                       onTap: () {
-                        context.read<GoogleProvider>().signIn(context);
+                        context.read<GoogleProvider>().signIn(context, 2);
                       },
                     ),
                     SizedBox(height: height * 0.05),
