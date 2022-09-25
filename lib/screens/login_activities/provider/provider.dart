@@ -34,6 +34,8 @@ class LoginProvider extends ChangeNotifier {
             emailController.clear();
             passwordController.clear();
           } else {
+            loading = false;
+            notifyListeners();
             customSnackBar(context, value!);
             log("something went wrong");
           }

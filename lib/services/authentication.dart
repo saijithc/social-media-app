@@ -1,19 +1,17 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:socio/api/api_endpoints.dart';
 import 'package:socio/screens/google/model/model.dart';
 import 'package:socio/screens/login_activities/view/widget/sucess.dart';
 import 'package:socio/widgets/custom_snackbar.dart';
 import '../helperfunction/helper_function.dart';
-import '../screens/login_activities/model/login_model.dart';
 import '../screens/signup/model_class/model.dart';
 
 class Auth {
   Future<String?> signupFunction(User user) async {
     try {
-      Response response = await Dio().post(
-          "https://tailus-api.herokuapp.com/api/v1/auth/signup",
-          data: user.tojson());
+      Response response =
+          await Dio().post("${Api.baseUrl}/auth/signup", data: user.tojson());
       if (response.statusCode! >= 200 || response.statusCode! <= 299) {
         log("hey..........");
         log(response.toString());
@@ -28,25 +26,26 @@ class Auth {
     } on DioError catch (e) {
       if (e.message.startsWith("SocketException")) {
         log("please check internet");
-        //customSnackBar(context, "please check your internet connection");
         return "please check your internet connection";
       }
+      if (e.response?.data is Map && e.response!.data['error'] != null) {
+        return e.response!.data['error'];
+      }
       log("Account creation Failed${e.toString()}");
-      //customSnackBar(context, e.response!.data['error']);
-      return e.response!.data['error'];
+      return 'something went wrong';
     }
     return 'error2';
   }
 
   Future<String?> signIn(user) async {
     try {
-      Response response = await Dio().post(
-          "https://tailus-api.herokuapp.com/api/v1/auth/signin",
-          data: user.toJson());
+      Response response =
+          await Dio().post("${Api.baseUrl}/auth/signin", data: user.toJson());
       if (response.statusCode! >= 200 || response.statusCode! <= 299) {
-        //  HelperFuction.saveToken(response.data["token"]);
-        HelperFuction.saveUser(response.data["id"], response.data["token"]);
         log(response.toString());
+        HelperFuction.saveUser(
+            response.data["id"], response.data["encryptToken"]);
+
         log(user.toString());
         return "sucess";
       } else {
@@ -56,11 +55,14 @@ class Auth {
         log(user.toString());
       }
     } on DioError catch (e) {
+      log(e.response!.data!.toString());
       if (e.message.startsWith("SocketException")) {
         return "please check your internet connection";
       }
-      log("Login failed ${e.response!.data['error']}");
-      return e.response!.data['error'];
+      if (e.response?.data is Map && e.response!.data['error'] != null) {
+        return e.response!.data['error'];
+      }
+      return 'something went wrong';
     }
     return "error 2";
   }
@@ -69,15 +71,13 @@ class Auth {
     try {
       Map data = user.tojson();
       data["Otp"] = otp;
-      Response response = await Dio().post(
-          "https://tailus-api.herokuapp.com/api/v1/auth/verifyOtp",
-          data: data);
+      Response response =
+          await Dio().post("${Api.baseUrl}/auth/verifyOtp", data: data);
       if (response.statusCode! >= 200 || response.statusCode! <= 299) {
-        log(' sucess');
+        log('sucess');
         log(response.data.toString());
-        //perFuction.saveToken(response.data["token"]);
         await HelperFuction.saveUser(
-            response.data["id"], response.data["token"]);
+            response.data["id"], response.data["encryptToken"]);
 
         log(response.statusMessage.toString());
         log('otp verification sucessfull');
@@ -99,30 +99,34 @@ class Auth {
 
   Future<String?> googleSignup(GoogleAccount account) async {
     try {
-      Response response = await Dio().post(
-          "https://tailus-api.herokuapp.com/api/v1/auth/googleSignup",
-          data: account.toJson());
+      Response response = await Dio()
+          .post("${Api.baseUrl}/auth/googleSignup", data: account.toJson());
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
         HelperFuction.saveUserLogged(true);
         //HelperFuction.saveToken(response.data["token"]);
-        HelperFuction.saveUser(response.data["id"], response.data["token"]);
+        HelperFuction.saveUser(
+            response.data["id"], response.data["encryptToken"]);
         log(response.toString());
         log(response.data.toString());
         return "SUCESS";
       }
       log(response.statusCode.toString());
     } on DioError catch (e) {
-      log(e.response!.data['error']);
-      return e.response!.data['error'];
+      if (e.message.startsWith("SocketException")) {
+        return "please check your internet connection";
+      }
+      if (e.response?.data is Map && e.response!.data['error'] != null) {
+        return e.response!.data['error'];
+      }
+      return 'something went wrong';
     }
     return 'error2';
   }
 
   Future<bool> forgotPassword(String email, context) async {
     try {
-      Response response = await Dio().post(
-          "https://tailus-api.herokuapp.com/api/v1/auth/forgotPassword",
-          data: {'email': email});
+      Response response = await Dio()
+          .post("${Api.baseUrl}/auth/forgotPassword", data: {'email': email});
       sucess(context, response.data['error']);
       log(response.toString());
       log(response.data.toString());

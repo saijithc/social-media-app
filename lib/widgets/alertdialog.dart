@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
 import 'options.dart';
 import 'text.dart';
 
@@ -71,21 +72,22 @@ customAlert(BuildContext context) {
                       ),
                     ),
                     Center(
-                      child: Container(
-                        height: height * 0.5,
-                        width: width * 0.85,
-                        decoration: BoxDecoration(
-                            image: const DecorationImage(
-                                image: AssetImage("assets/music.jpeg"),
-                                fit: BoxFit.cover),
-                            borderRadius: BorderRadius.circular(30)),
+                      child: PinchZoomReleaseUnzoomWidget(
+                        child: Container(
+                          height: height * 0.5,
+                          width: width * 0.85,
+                          decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                  image: AssetImage("assets/music.jpeg"),
+                                  fit: BoxFit.cover),
+                              borderRadius: BorderRadius.circular(30)),
+                        ),
                       ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          // height: height * 0.05,
                           width: width * 0.8,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),

@@ -22,7 +22,7 @@ class GoogleProvider with ChangeNotifier {
           if (count == 1) {
             Auth().googleSignup(account).then((value) {
               if (value == "SUCESS") {
-                customSnackBar(context, "SUCESS");
+                // customSnackBar(context, "SUCESS");
                 Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (ctx) => const Bottom()));
               } else {

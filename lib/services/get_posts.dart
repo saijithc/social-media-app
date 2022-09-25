@@ -1,0 +1,29 @@
+import 'dart:developer';
+import 'package:dio/dio.dart';
+import 'package:socio/api/api_endpoints.dart';
+import 'package:socio/helperfunction/helper_function.dart';
+import 'package:socio/screens/current_user/model/post_model.dart';
+import 'package:socio/screens/other_users/postview.dart';
+
+class GetPosts {
+  Future<List<GetPostModel>?> GetTimelinePosts() async {
+    try {
+      final id = await HelperFuction.getUserid();
+      final authToken = await HelperFuction.getToken();
+      final token = {"authtoken": authToken};
+      Response response = await Dio().get("${Api.baseUrl}/post/timeline/${id}",
+          options: Options(headers: token));
+      if (response.statusCode! > 199 || response.statusCode! < 300) {
+        log("type of response data" + response.data.runtimeType.toString());
+        log(response.statusCode.toString());
+        log("datas = " + response.data.toString());
+        return getPostModelFromJson(response.data);
+      }
+      log(response.data);
+      log(response.statusCode.toString());
+    } on DioError catch (e) {
+      log(e.message);
+      return null;
+    }
+  }
+}

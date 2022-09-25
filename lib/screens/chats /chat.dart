@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:socio/screens/chats%20/view/chatroom.dart';
 
 import '../../widgets/text.dart';
 import '../theme/theme_mode.dart';
@@ -74,6 +75,10 @@ class ChatScreen extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: ((context) => ChatRoom())));
+                          },
                           leading: Container(
                             height: height * 0.065,
                             width: width * 0.15,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
 import 'package:socio/widgets/more.dart';
 import 'package:socio/widgets/text.dart';
 
@@ -72,15 +73,17 @@ followersPosts(BuildContext context) {
                       ),
                     ),
                     Center(
-                      child: Container(
-                        height: height * 0.5,
-                        width: width * 0.85,
-                        decoration: BoxDecoration(
-                            image: const DecorationImage(
-                                image: AssetImage(
-                                    "assets/wheels on the bus ➸ [larry au] - ღ chapter two ღ.jpeg"),
-                                fit: BoxFit.cover),
-                            borderRadius: BorderRadius.circular(30)),
+                      child: PinchZoomReleaseUnzoomWidget(
+                        child: Container(
+                          height: height * 0.5,
+                          width: width * 0.85,
+                          decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                  image: AssetImage(
+                                      "assets/wheels on the bus ➸ [larry au] - ღ chapter two ღ.jpeg"),
+                                  fit: BoxFit.cover),
+                              borderRadius: BorderRadius.circular(30)),
+                        ),
                       ),
                     ),
                     Row(

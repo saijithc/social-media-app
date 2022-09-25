@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:socio/screens/current_user/model/post_model.dart';
 import 'package:socio/screens/other_users/followers_profile.dart';
+import 'package:socio/services/get_posts.dart';
 import 'package:socio/widgets/alertdialog.dart';
 import 'package:socio/widgets/text.dart';
 
@@ -58,6 +60,7 @@ class Likes extends StatelessWidget {
             ),
             trailing: GestureDetector(
               onTap: () {
+                GetPosts().GetTimelinePosts();
                 customAlert(context);
               },
               child: Container(

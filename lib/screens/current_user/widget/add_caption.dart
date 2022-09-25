@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/current_user/add_post.dart';
-import 'package:socio/screens/current_user/model/post_model.dart';
-import 'package:socio/screens/current_user/profile.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/theme/theme_mode.dart';
 
@@ -82,7 +80,18 @@ class AddCaption extends StatelessWidget {
                                 .read<CurrentUserProvider>()
                                 .uploadPost(context);
                           },
-                          child: const Text("Done")),
+                          child: Consumer<CurrentUserProvider>(
+                            builder: (context, value, child) {
+                              return value.isLoading == true
+                                  ? SizedBox(
+                                      height: 15,
+                                      width: 15,
+                                      child: const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ))
+                                  : const Text("Done");
+                            },
+                          )),
                     ),
                   ],
                 ),

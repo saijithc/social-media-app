@@ -234,7 +234,7 @@ packages:
     source: hosted
     version: "0.13.5"
   http_parser:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http_parser
       url: "https://pub.dartlang.org"
@@ -373,6 +373,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.4.0"
+  pinch_zoom_release_unzoom:
+    dependency: "direct main"
+    description:
+      name: pinch_zoom_release_unzoom
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.8"
   platform:
     dependency: transitive
     description:
@@ -464,13 +471,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-  shimmr:
+  shimmer:
     dependency: "direct main"
     description:
-      name: shimmr
+      name: shimmer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "2.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
