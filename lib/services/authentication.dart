@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:socio/api/api_endpoints.dart';
+import 'package:socio/screens/current_user/model/user.dart';
 import 'package:socio/screens/google/model/model.dart';
 import 'package:socio/screens/login_activities/view/widget/sucess.dart';
 import 'package:socio/widgets/custom_snackbar.dart';
@@ -45,7 +46,7 @@ class Auth {
         log(response.toString());
         HelperFuction.saveUser(
             response.data["id"], response.data["encryptToken"]);
-
+        CurrentUser.userId = await HelperFuction.getUserid();
         log(user.toString());
         return "sucess";
       } else {
@@ -78,7 +79,7 @@ class Auth {
         log(response.data.toString());
         await HelperFuction.saveUser(
             response.data["id"], response.data["encryptToken"]);
-
+        CurrentUser.userId = await HelperFuction.getUserid();
         log(response.statusMessage.toString());
         log('otp verification sucessfull');
         return "sucess";
@@ -106,8 +107,9 @@ class Auth {
         //HelperFuction.saveToken(response.data["token"]);
         HelperFuction.saveUser(
             response.data["id"], response.data["encryptToken"]);
+        CurrentUser.userId = await HelperFuction.getUserid();
         log(response.toString());
-        log(response.data.toString());
+        log("google response" + response.data.toString());
         return "SUCESS";
       }
       log(response.statusCode.toString());

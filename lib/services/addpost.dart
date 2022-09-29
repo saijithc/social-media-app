@@ -27,7 +27,7 @@ class Post {
 
       final authToken = await HelperFuction.getToken();
       final token = {"authtoken": authToken};
-
+      log("this is the toked =" + token.toString());
       log("called uploadImage function API");
       Response response = await Dio().post("${Api.baseUrl}/post",
           data: formData,

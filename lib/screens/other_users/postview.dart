@@ -3,10 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
 import 'package:provider/provider.dart';
-import 'package:socio/screens/current_user/model/post_model.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/other_users/followers_profile.dart';
-import 'package:socio/services/get_posts.dart';
+import 'package:socio/screens/other_users/provider/provider.dart';
+import 'package:socio/widgets/caption.dart';
+import 'package:socio/widgets/like_button.dart';
 import 'package:socio/widgets/more.dart';
 import 'package:socio/widgets/text.dart';
 
@@ -17,7 +18,7 @@ class Posts extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-
+    // .checkLikes(value.POSTS[index].likes);
     return FutureBuilder(
       future: context.read<CurrentUserProvider>().getPost(),
       //initialData: InitialData,
@@ -75,7 +76,7 @@ class Posts extends StatelessWidget {
                                             builder: (ctx) =>
                                                 const FollowersProfile()));
                                   },
-                                  child: text("harrystyles", Colors.white,
+                                  child: text('username', Colors.white,
                                       height * 0.02, FontWeight.w700, 1),
                                 ),
                                 SizedBox(
@@ -123,16 +124,26 @@ class Posts extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
-                                //height: height * 0.03,
                                 width: width * 0.8,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: text(
-                                      value.POSTS[index].caption,
-                                      Colors.white,
-                                      height * 0.014,
-                                      FontWeight.bold,
-                                      2),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (ctx) => CaptionScreen(
+                                                  comment: value
+                                                      .POSTS[index].comments,
+                                                  caption: value
+                                                      .POSTS[index].caption)));
+                                    },
+                                    child: text(
+                                        value.POSTS[index].caption,
+                                        Colors.white,
+                                        height * 0.014,
+                                        FontWeight.bold,
+                                        2),
+                                  ),
                                 ),
                               )
                             ],
@@ -142,18 +153,16 @@ class Posts extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.favorite_border,
-                                      color: Colors.red,
-                                    )),
-                                text(
-                                    value.POSTS[index].likes.length.toString(),
-                                    Colors.white,
-                                    height * 0.012,
-                                    FontWeight.w600,
-                                    1),
+                                Consumer<FollowersProvider>(
+                                  builder: (context, val, child) {
+                                    return likeButton(
+                                        context: context,
+                                        id: value.POSTS[index].id,
+                                        likes: value.POSTS[index].likes,
+                                        count: value.POSTS[index].likes.length
+                                            .toString());
+                                  },
+                                ),
                                 SizedBox(
                                   width: width * 0.05,
                                 ),

@@ -61,7 +61,7 @@ class GetPostModel {
 
   factory GetPostModel.fromJson(Map<String, dynamic> json) => GetPostModel(
         id: json["_id"],
-        userId: json["userId"],
+        userId: "user",
         image: json["image"],
         caption: json["caption"],
         hashtags: List<dynamic>.from(json["hashtags"].map((x) => x)),

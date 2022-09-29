@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:socio/helperfunction/helper_function.dart';
 import 'package:socio/screens/bottom/bottom.dart';
+import 'package:socio/screens/current_user/model/current_user_details.dart';
 import 'package:socio/screens/current_user/model/post_model.dart';
 import 'package:socio/services/addpost.dart';
+import 'package:socio/services/current_user_details.dart';
 import 'package:socio/services/get_posts.dart';
 import 'package:socio/widgets/custom_snackbar.dart';
 
@@ -15,6 +17,8 @@ class CurrentUserProvider with ChangeNotifier {
   int tCount = 0;
   File? image;
   bool isLoading = false;
+  GetCurrentUserPostModel? MyDetails;
+  // List<GetCurrentUserPostModel> MyDetails = [];
   List<GetPostModel> POSTS = [];
   final TextEditingController captionController = TextEditingController();
   setPMode(context) {
@@ -41,7 +45,8 @@ class CurrentUserProvider with ChangeNotifier {
 
   pickImageFromCamera(ImageSource source) async {
     try {
-      XFile? pickedImage = await ImagePicker().pickImage(source: source);
+      XFile? pickedImage = await ImagePicker().pickImage(
+          source: source, imageQuality: 80, maxHeight: 1080, maxWidth: 1080);
       if (pickedImage != null) {
         image = File(pickedImage.path);
         notifyListeners();
@@ -69,8 +74,10 @@ class CurrentUserProvider with ChangeNotifier {
         isLoading = false;
         notifyListeners();
         customSnackBar(context, "Post Created Successfully");
+
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (ctx) => const Bottom()));
+        getMyProfileDetai();
       } else {
         isLoading = false;
         notifyListeners();
@@ -82,6 +89,13 @@ class CurrentUserProvider with ChangeNotifier {
 
   Future getPost() async {
     POSTS = await GetPosts().GetTimelinePosts() ?? [];
+    // log(POSTS.toString());
+    notifyListeners();
+  }
+
+  Future getMyProfileDetai() async {
+    MyDetails = await CurrentUserDetails().getUserDetails();
+    log("this is my details" + MyDetails.toString());
     notifyListeners();
   }
 }

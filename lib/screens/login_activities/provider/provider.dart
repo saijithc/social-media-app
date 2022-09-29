@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:socio/screens/bottom/bottom.dart';
+import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/login_activities/model/login_model.dart';
 import 'package:socio/services/authentication.dart';
 import 'package:socio/widgets/custom_snackbar.dart';
@@ -31,6 +32,7 @@ class LoginProvider extends ChangeNotifier {
           if (value == "sucess") {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (ctx) => const Bottom()));
+
             emailController.clear();
             passwordController.clear();
           } else {

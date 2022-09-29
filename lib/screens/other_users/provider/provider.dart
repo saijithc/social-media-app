@@ -1,9 +1,11 @@
 import 'package:flutter/widgets.dart';
+import 'package:socio/services/like_post.dart';
 
 class FollowersProvider with ChangeNotifier {
   double? tabviewHeight;
   int pCount = 0;
   int tCount = 0;
+  bool like = false;
   setPMode(context) {
     setTabviewHeight(context: context, childCount: pCount, crossAxisCount: 2);
   }
@@ -24,4 +26,34 @@ class FollowersProvider with ChangeNotifier {
     tabviewHeight = tileHeight * (childCount / crossAxisCount);
     notifyListeners();
   }
+
+  getPostLike(id) {
+    like = !like;
+    notifyListeners();
+    LikePost().likePost(id);
+  }
+  // getPostLike(id) {
+  //   checkLike() {
+  //     like = !like;
+  //     notifyListeners();
+  //   }
+
+  //   LikePost().likePost(id).then((value) {
+  //     if (like == false || value == "Post liked") {
+  //       like = true;
+  //       notifyListeners();
+  //     }
+  //   }
+  //   );
+  // }
 }
+// getPostLike(id) { 
+//     like = !like;
+//     notifyListeners();
+//     LikePost().likePost(id);
+//   }
+
+  // checkLike() {
+  //     like = !like;
+  //     notifyListeners();
+  //   }
