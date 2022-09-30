@@ -18,6 +18,9 @@ class Posts extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    // if (context.read<CurrentUserProvider>().POSTS == null) {
+    //   context.read<CurrentUserProvider>().getPost();
+    // }
     // .checkLikes(value.POSTS[index].likes);
     return FutureBuilder(
       future: context.read<CurrentUserProvider>().getPost(),
@@ -26,172 +29,198 @@ class Posts extends StatelessWidget {
         return Consumer<CurrentUserProvider>(
           builder: (context, value, child) {
             log("post count = " + value.POSTS.length.toString());
-            return ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: value.POSTS.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    SizedBox(
-                      height: height * 0.008,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.black,
+            return value.POSTS.isEmpty
+                ? Column(
+                    children: [
+                      SizedBox(
+                        height: height * .6 / 2,
                       ),
-                      // height: height * 0.7,
-                      width: width * 0.93,
-                      child: Column(
+                      CircularProgressIndicator(),
+                    ],
+                  )
+                : ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: value.POSTS.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5, bottom: 5),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          SizedBox(
+                            height: height * 0.008,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: Colors.black,
+                            ),
+                            // height: height * 0.7,
+                            width: width * 0.93,
+                            child: Column(
                               children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (ctx) =>
-                                                const FollowersProfile()));
-                                  },
-                                  child: Container(
-                                    height: height * 0.05,
-                                    width: width * 0.1,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                                value.POSTS[index].image),
-                                            fit: BoxFit.cover),
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (ctx) =>
+                                                      const FollowersProfile()));
+                                        },
+                                        child: Container(
+                                          height: height * 0.05,
+                                          width: width * 0.1,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: NetworkImage(value
+                                                      .POSTS[index]
+                                                      .userId
+                                                      .avatar),
+                                                  fit: BoxFit.cover),
+                                              borderRadius:
+                                                  BorderRadius.circular(30)),
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (ctx) =>
+                                                      const FollowersProfile()));
+                                        },
+                                        child: text(
+                                            value.POSTS[index].userId.fullname,
+                                            Colors.white,
+                                            height * 0.02,
+                                            FontWeight.w700,
+                                            1),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.1,
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          text(
+                                              value.POSTS[index].updatedAt
+                                                  .toString(),
+                                              const Color.fromARGB(
+                                                  207, 253, 247, 247),
+                                              height * 0.01,
+                                              FontWeight.w400,
+                                              1),
+                                          IconButton(
+                                              onPressed: () {
+                                                more(context);
+                                              },
+                                              icon: const Icon(
+                                                Icons.more_vert,
+                                                color: Colors.white,
+                                              ))
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (ctx) =>
-                                                const FollowersProfile()));
-                                  },
-                                  child: text('username', Colors.white,
-                                      height * 0.02, FontWeight.w700, 1),
-                                ),
-                                SizedBox(
-                                  width: width * 0.1,
+                                Center(
+                                  child: PinchZoomReleaseUnzoomWidget(
+                                    child: Container(
+                                      height: height * 0.5,
+                                      width: width * 0.9,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  value.POSTS[index].image),
+                                              fit: BoxFit.cover),
+                                          borderRadius:
+                                              BorderRadius.circular(30)),
+                                    ),
+                                  ),
                                 ),
                                 Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    text(
-                                        value.POSTS[index].updatedAt.toString(),
-                                        const Color.fromARGB(
-                                            207, 253, 247, 247),
-                                        height * 0.01,
-                                        FontWeight.w400,
-                                        1),
-                                    IconButton(
-                                        onPressed: () {
-                                          more(context);
-                                        },
-                                        icon: const Icon(
-                                          Icons.more_vert,
-                                          color: Colors.white,
-                                        ))
+                                    SizedBox(
+                                      width: width * 0.8,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (ctx) =>
+                                                        CaptionScreen(
+                                                            comment:
+                                                                value
+                                                                    .POSTS[
+                                                                        index]
+                                                                    .comments,
+                                                            caption: value
+                                                                .POSTS[index]
+                                                                .caption)));
+                                          },
+                                          child: text(
+                                              value.POSTS[index].caption,
+                                              Colors.white,
+                                              height * 0.014,
+                                              FontWeight.bold,
+                                              2),
+                                        ),
+                                      ),
+                                    )
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
-                          Center(
-                            child: PinchZoomReleaseUnzoomWidget(
-                              child: Container(
-                                height: height * 0.5,
-                                width: width * 0.9,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            value.POSTS[index].image),
-                                        fit: BoxFit.cover),
-                                    borderRadius: BorderRadius.circular(30)),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: width * 0.8,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (ctx) => CaptionScreen(
-                                                  comment: value
-                                                      .POSTS[index].comments,
-                                                  caption: value
-                                                      .POSTS[index].caption)));
-                                    },
-                                    child: text(
-                                        value.POSTS[index].caption,
-                                        Colors.white,
-                                        height * 0.014,
-                                        FontWeight.bold,
-                                        2),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Consumer<FollowersProvider>(
+                                        builder: (context, val, child) {
+                                          return likeButton(
+                                              context: context,
+                                              id: value.POSTS[index].id,
+                                              likes: value.POSTS[index].likes,
+                                              count: value
+                                                  .POSTS[index].likes.length
+                                                  .toString());
+                                        },
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.05,
+                                      ),
+                                      IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            Icons.mode_comment_outlined,
+                                            color: Colors.white,
+                                          )),
+                                      text(
+                                          value.POSTS[index].comments.length
+                                              .toString(),
+                                          Colors.white,
+                                          height * 0.012,
+                                          FontWeight.w600,
+                                          1),
+                                    ],
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Consumer<FollowersProvider>(
-                                  builder: (context, val, child) {
-                                    return likeButton(
-                                        context: context,
-                                        id: value.POSTS[index].id,
-                                        likes: value.POSTS[index].likes,
-                                        count: value.POSTS[index].likes.length
-                                            .toString());
-                                  },
-                                ),
-                                SizedBox(
-                                  width: width * 0.05,
-                                ),
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.mode_comment_outlined,
-                                      color: Colors.white,
-                                    )),
-                                text(
-                                    value.POSTS[index].comments.length
-                                        .toString(),
-                                    Colors.white,
-                                    height * 0.012,
-                                    FontWeight.w600,
-                                    1),
+                                )
                               ],
                             ),
+                          ),
+                          SizedBox(
+                            height: height * 0.01,
                           )
                         ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: height * 0.01,
-                    )
-                  ],
-                );
-              },
-            );
+                      );
+                    },
+                  );
           },
         );
       },

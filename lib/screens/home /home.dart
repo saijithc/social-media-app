@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:socio/screens/current_user/model/current_user_details.dart';
+import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/other_users/postview.dart';
 import 'package:socio/screens/other_users/stories.dart';
 
@@ -9,16 +12,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: const [
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: Stories(),
-              ),
-              Posts(),
-            ],
+        body: RefreshIndicator(
+          onRefresh: () => context.read<CurrentUserProvider>().getPost(),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Stories(),
+                ),
+                Posts(),
+              ],
+            ),
           ),
         ),
       ),

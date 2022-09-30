@@ -25,7 +25,8 @@ class FollowersTagScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
             onTap: () {
-              customAlert(context);
+              //TODO:
+              //customAlert(context);
             },
             child: Container(
               height: height * 0.1,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:socio/helperfunction/helper_function.dart';
+import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/current_user/widget/switch.dart';
 import 'package:socio/screens/google/provider/provider.dart';
 import 'package:socio/screens/login_activities/view/login.dart';
@@ -92,6 +94,9 @@ class Settings extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    context
+                                        .read<CurrentUserProvider>()
+                                        .MyDetails = null;
                                     HelperFuction.deleteToken();
                                     GoogleSignInApi.logout();
                                     Navigator.pop(context);

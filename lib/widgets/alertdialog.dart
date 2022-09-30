@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
+import 'package:provider/provider.dart';
+import '../screens/current_user/provider/provider.dart';
+import 'like_button.dart';
 import 'options.dart';
 import 'text.dart';
 
-customAlert(BuildContext context) {
+customAlert(BuildContext context, CurrentUserProvider value, int index) {
   final height = MediaQuery.of(context).size.height;
   final width = MediaQuery.of(context).size.width;
+
   return showDialog(
     context: context,
     builder: (context) {
@@ -35,13 +39,14 @@ customAlert(BuildContext context) {
                             height: height * 0.05,
                             width: width * 0.1,
                             decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                    image: AssetImage("assets/me.jpg"),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        value.MyDetails!.otherDetails.avatar),
                                     fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(30)),
                           ),
-                          text("your_name", Colors.white, height * 0.02,
-                              FontWeight.w700, 1),
+                          text(value.MyDetails!.otherDetails.fullname,
+                              Colors.white, height * 0.02, FontWeight.w700, 1),
                           SizedBox(
                             width: width * 0.08,
                           ),
@@ -50,7 +55,8 @@ customAlert(BuildContext context) {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               text(
-                                  "2hours ago",
+                                  value.MyDetails!.otherDetails.updatedAt
+                                      .toString(),
                                   const Color.fromARGB(207, 253, 247, 247),
                                   height * 0.01,
                                   FontWeight.w400,
@@ -77,8 +83,9 @@ customAlert(BuildContext context) {
                           height: height * 0.5,
                           width: width * 0.85,
                           decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage("assets/music.jpeg"),
+                              image: DecorationImage(
+                                  image: NetworkImage(value.MyDetails!
+                                      .currentUserPosts[index].image),
                                   fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(30)),
                         ),
@@ -92,7 +99,8 @@ customAlert(BuildContext context) {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: text(
-                                "Love on tour,New York City😋..jhfdkjhkdhdkkdkffhfggkhdfgihkdfg      khjjkdscvhjks ihjkdsxcvn nm iuhdcfvjnbxdcb biuhdfkn hihidfgiihdfghkjhfgdhffhlfhgiejjfdfhkhdkjfggkdfghdkfgdgdfgigurgjeoj",
+                                value
+                                    .MyDetails!.currentUserPosts[index].caption,
                                 Colors.white,
                                 height * 0.014,
                                 FontWeight.bold,
@@ -104,14 +112,14 @@ customAlert(BuildContext context) {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.favorite_border,
-                              color: Colors.red,
-                            )),
-                        text("1.2K", Colors.white, height * 0.012,
-                            FontWeight.w600, 1),
+                        likeButton(
+                            context: context,
+                            id: value.MyDetails!.currentUserPosts[index].id,
+                            likes:
+                                value.MyDetails!.currentUserPosts[index].likes,
+                            count: value
+                                .MyDetails!.currentUserPosts[index].likes.length
+                                .toString()),
                         SizedBox(
                           width: width * 0.05,
                         ),

@@ -72,6 +72,7 @@ class CurrentUserProvider with ChangeNotifier {
       if (value == 'sucess') {
         captionController.clear();
         isLoading = false;
+        getMyProfileDetai();
         notifyListeners();
         customSnackBar(context, "Post Created Successfully");
 

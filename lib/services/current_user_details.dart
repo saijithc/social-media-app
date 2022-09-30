@@ -13,8 +13,6 @@ class CurrentUserDetails {
       Response response = await Dio().get("${Api.baseUrl}/user/${id}");
       if (response.statusCode! > 199 || response.statusCode! < 300) {
         log("sucess ++");
-        //log(response.data.toString());
-        // log(response.statusCode.toString());
         return GetCurrentUserPostModel.fromJson(response.data);
       } else {
         log(response.statusCode.toString());

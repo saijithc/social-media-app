@@ -7,6 +7,8 @@ import 'package:socio/screens/current_user/myposts.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/current_user/settings.dart';
 import 'package:socio/widgets/buttons.dart';
+import 'package:socio/widgets/counts.dart';
+import 'package:socio/widgets/edit_&_add_profilebutton.dart';
 import 'package:socio/widgets/text.dart';
 
 import '../theme/theme_mode.dart';
@@ -69,210 +71,135 @@ class _ProfileScreenState extends State<ProfileScreen>
               " profile",
               weight: FontWeight.bold,
             )),
-        body: SingleChildScrollView(
-          child: Consumer<CurrentUserProvider>(
-            builder: (context, value, child) {
-              return Column(
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromARGB(55, 138, 138, 138),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(50),
-                            bottomRight: Radius.circular(50))),
-                    height: height * 0.35,
-                    width: width,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: height * 0.01, bottom: height * 0.01),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: width * 0.05, right: width * 0.05),
-                                child: Container(
-                                  height: height * 0.1,
-                                  width: width * 0.22,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(value
-                                              .MyDetails!.otherDetails.avatar),
-                                          fit: BoxFit.cover),
-                                      borderRadius: BorderRadius.circular(30)),
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  text1(
-                                    value.MyDetails!.otherDetails.fullname,
-                                    sizes: height * 0.025,
-                                    weight: FontWeight.bold,
-                                  ),
-                                  SizedBox(
-                                    height: height * 0.01,
-                                  ),
-                                  text1(value.MyDetails!.otherDetails.bio,
-                                      sizes: height * 0.015,
-                                      weight: FontWeight.w300)
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: height * 0.02,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: buttons(
-                                  height * 0.06,
-                                  width * 0.35,
-                                  height * 0.03,
-                                  "Edit Profile",
-                                  const Color.fromARGB(255, 112, 112, 112),
-                                  Colors.white,
-                                  height * 0.015,
-                                  FontWeight.w500),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                context.read<CurrentUserProvider>().image =
-                                    null;
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (ctx) => const AddPost()));
-                              },
-                              child: buttons(
-                                  height * 0.06,
-                                  width * 0.35,
-                                  height * 0.03,
-                                  "Add Post",
-                                  const Color.fromARGB(255, 112, 112, 112),
-                                  Colors.white,
-                                  height * 0.015,
-                                  FontWeight.w500),
-                            )
-                          ],
-                        ),
-                        SizedBox(height: height * 0.048),
-                        Container(
-                          margin: const EdgeInsets.only(left: 5, right: 5),
-                          height: height * 0.1,
-                          width: width,
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(50)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  text(
-                                      value.MyDetails!.currentUserPosts.length
-                                          .toString(),
-                                      Colors.white,
-                                      height * 0.03,
-                                      FontWeight.w600,
-                                      1),
-                                  text("Total Post", Colors.white,
-                                      height * 0.015, FontWeight.w500, 1)
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  text(
-                                      value.MyDetails!.otherDetails.followers
-                                          .length
-                                          .toString(),
-                                      Colors.white,
-                                      height * 0.03,
-                                      FontWeight.w600,
-                                      1),
-                                  text("Followers", Colors.white,
-                                      height * 0.015, FontWeight.w500, 1)
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  text(
-                                      value.MyDetails!.otherDetails.following
-                                          .length
-                                          .toString(),
-                                      Colors.white,
-                                      height * 0.03,
-                                      FontWeight.w600,
-                                      1),
-                                  text("Following", Colors.white,
-                                      height * 0.015, FontWeight.w500, 1)
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: height * 0.02,
-                  ),
-                  const HighLights(),
-                  SizedBox(
-                    height: height * 0.02,
-                  ),
-                  Consumer<ThemeChanger>(
-                    builder: (context, val, child) {
+        body: context.watch<CurrentUserProvider>().MyDetails == null
+            ? Center(child: const CircularProgressIndicator())
+            : RefreshIndicator(
+                onRefresh: () =>
+                    context.read<CurrentUserProvider>().getMyProfileDetai(),
+                child: SingleChildScrollView(
+                  child: Consumer<CurrentUserProvider>(
+                    builder: (context, value, child) {
                       return Column(
                         children: [
-                          TabBar(
-                            controller: tabController,
-                            tabs: [
-                              Tab(
-                                icon: Icon(
-                                  Icons.grid_view_outlined,
-                                  color: val.thememode == ThemeMode.dark
-                                      ? Colors.white
-                                      : Colors.black,
+                          Container(
+                            decoration: const BoxDecoration(
+                                color: Color.fromARGB(55, 138, 138, 138),
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(50),
+                                    bottomRight: Radius.circular(50))),
+                            height: height * 0.35,
+                            width: width,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      top: height * 0.01,
+                                      bottom: height * 0.01),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: width * 0.05,
+                                            right: width * 0.05),
+                                        child: Container(
+                                          height: height * 0.1,
+                                          width: width * 0.22,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: NetworkImage(value
+                                                      .MyDetails!
+                                                      .otherDetails
+                                                      .avatar),
+                                                  fit: BoxFit.cover),
+                                              borderRadius:
+                                                  BorderRadius.circular(30)),
+                                        ),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          text1(
+                                            value.MyDetails!.otherDetails
+                                                .fullname,
+                                            sizes: height * 0.025,
+                                            weight: FontWeight.bold,
+                                          ),
+                                          SizedBox(
+                                            height: height * 0.01,
+                                          ),
+                                          text1(
+                                              value.MyDetails!.otherDetails.bio,
+                                              sizes: height * 0.015,
+                                              weight: FontWeight.w300)
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Tab(
-                                icon: Icon(
-                                  Icons.person_pin_circle_outlined,
-                                  color: val.thememode == ThemeMode.dark
-                                      ? Colors.white
-                                      : Colors.black,
+                                SizedBox(
+                                  height: height * 0.02,
                                 ),
-                              ),
-                            ],
+                                EditAndAddButtons(context),
+                                SizedBox(height: height * 0.048),
+                                Counts(context, value)
+                              ],
+                            ),
                           ),
                           SizedBox(
-                              height: context
-                                      .watch<CurrentUserProvider>()
-                                      .tabViewheight ??
-                                  0,
-                              child: TabBarView(
-                                  controller: tabController,
-                                  children: const [MyPosts(), TagScreen()]))
+                            height: height * 0.02,
+                          ),
+                          const HighLights(),
+                          SizedBox(
+                            height: height * 0.02,
+                          ),
+                          Consumer<ThemeChanger>(
+                            builder: (context, val, child) {
+                              return Column(
+                                children: [
+                                  TabBar(
+                                    controller: tabController,
+                                    tabs: [
+                                      Tab(
+                                        icon: Icon(
+                                          Icons.grid_view_outlined,
+                                          color: val.thememode == ThemeMode.dark
+                                              ? Colors.white
+                                              : Colors.black,
+                                        ),
+                                      ),
+                                      Tab(
+                                        icon: Icon(
+                                          Icons.person_pin_circle_outlined,
+                                          color: val.thememode == ThemeMode.dark
+                                              ? Colors.white
+                                              : Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                      height: context
+                                              .watch<CurrentUserProvider>()
+                                              .tabViewheight ??
+                                          0,
+                                      child: TabBarView(
+                                          controller: tabController,
+                                          children: const [
+                                            MyPosts(),
+                                            TagScreen()
+                                          ]))
+                                ],
+                              );
+                            },
+                          ),
                         ],
                       );
                     },
                   ),
-                ],
-              );
-            },
-          ),
-        ),
+                ),
+              ),
       ),
     );
   }

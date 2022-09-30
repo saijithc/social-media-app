@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
 
 import 'package:socio/widgets/alertdialog.dart';
+import 'package:socio/widgets/text.dart';
 
 class MyPosts extends StatefulWidget {
   const MyPosts({Key? key}) : super(key: key);
@@ -28,43 +29,50 @@ class _MyPostsState extends State<MyPosts> {
     log('PROFILE BUILDED');
     context.read<CurrentUserProvider>().pCount =
         context.watch<CurrentUserProvider>().MyDetails!.currentUserPosts.length;
-    // context.watch<CurrentUserProvider>().POSTS.length;
     log("callig repeatedly");
-    // return FutureBuilder(
-    //   future: context.read<CurrentUserProvider>().getMyProfileDetai(),
-    //   // initialData: InitialData,
-    //   builder: (BuildContext context, AsyncSnapshot snapshot) {
     return Consumer<CurrentUserProvider>(
       builder: (context, value, child) {
-        return GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: value.MyDetails!.currentUserPosts.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: () {
-                  customAlert(context);
-                },
-                child: Container(
-                  height: height * 0.1,
-                  width: width * 0.1,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              value.MyDetails!.currentUserPosts[index].image),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.black),
+        return value.MyDetails!.currentUserPosts.isEmpty
+            ? Align(
+                alignment: Alignment.topCenter,
+                child: Column(
+                  children: [
+                    SizedBox(height: height * 0.1),
+                    text1("No Post", sizes: 24, weight: FontWeight.bold),
+                  ],
+                ))
+            : GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
                 ),
-              ),
-            );
-          },
-        );
+                itemCount: value.MyDetails!.currentUserPosts.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return value.MyDetails == null
+                      ? Center(child: const CircularProgressIndicator())
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              value.getMyProfileDetai();
+                              customAlert(context, value, index);
+                            },
+                            child: Container(
+                              height: height * 0.1,
+                              width: width * 0.1,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(value.MyDetails!
+                                          .currentUserPosts[index].image),
+                                      fit: BoxFit.cover),
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.black),
+                            ),
+                          ),
+                        );
+                },
+              );
       },
     );
   }

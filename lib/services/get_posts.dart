@@ -10,6 +10,7 @@ class GetPosts {
       final id = await HelperFuction.getUserid();
       final authToken = await HelperFuction.getToken();
       final token = {"authtoken": authToken};
+      log("this is my auth token" + token.toString());
       Response response = await Dio().get("${Api.baseUrl}/post/timeline/${id}",
           options: Options(headers: token));
       if (response.statusCode! > 199 || response.statusCode! < 300) {

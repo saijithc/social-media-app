@@ -61,7 +61,8 @@ class Likes extends StatelessWidget {
             trailing: GestureDetector(
               onTap: () {
                 GetPosts().GetTimelinePosts();
-                customAlert(context);
+                //customAlert(context);
+                //TODO
               },
               child: Container(
                 height: height * 0.06,
