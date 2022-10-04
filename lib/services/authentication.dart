@@ -3,7 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:socio/api/api_endpoints.dart';
 import 'package:socio/screens/current_user/model/user.dart';
 import 'package:socio/screens/google/model/model.dart';
+import 'package:socio/screens/login_activities/model/login_model.dart';
 import 'package:socio/screens/login_activities/view/widget/sucess.dart';
+import 'package:socio/screens/signup/model_class/otpverification.dart';
 import 'package:socio/widgets/custom_snackbar.dart';
 import '../helperfunction/helper_function.dart';
 import '../screens/signup/model_class/model.dart';
@@ -44,8 +46,8 @@ class Auth {
           await Dio().post("${Api.baseUrl}/auth/signin", data: user.toJson());
       if (response.statusCode! >= 200 || response.statusCode! <= 299) {
         log(response.toString());
-        HelperFuction.saveUser(
-            response.data["id"], response.data["encryptToken"]);
+        final details = LoginUserDetails.fromJson(response.data);
+        HelperFuction.saveUser(details.userDetails.id, details.token);
         CurrentUser.userId = await HelperFuction.getUserid();
         log(user.toString());
         return "sucess";
@@ -56,7 +58,7 @@ class Auth {
         log(user.toString());
       }
     } on DioError catch (e) {
-      log(e.response!.data!.toString());
+      log(e.response!.data.toString());
       if (e.message.startsWith("SocketException")) {
         return "please check your internet connection";
       }
@@ -77,9 +79,8 @@ class Auth {
       if (response.statusCode! >= 200 || response.statusCode! <= 299) {
         log('sucess');
         log(response.data.toString());
-        await HelperFuction.saveUser(
-            response.data["id"], response.data["encryptToken"]);
-        CurrentUser.userId = await HelperFuction.getUserid();
+        final details = OtpVerification.fromJson(response.data);
+        HelperFuction.saveUser(details.userDetails.id, details.token);
         log(response.statusMessage.toString());
         log('otp verification sucessfull');
         return "sucess";
@@ -105,8 +106,7 @@ class Auth {
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
         HelperFuction.saveUserLogged(true);
         //HelperFuction.saveToken(response.data["token"]);
-        HelperFuction.saveUser(
-            response.data["id"], response.data["encryptToken"]);
+        HelperFuction.saveUser(response.data["id"], response.data["token"]);
         CurrentUser.userId = await HelperFuction.getUserid();
         log(response.toString());
         log("google response" + response.data.toString());

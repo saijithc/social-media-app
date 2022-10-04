@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:socio/screens/current_user/profile.dart';
 import 'package:socio/screens/google/model/model.dart';
 import 'package:socio/services/authentication.dart';
 import 'package:socio/widgets/custom_snackbar.dart';

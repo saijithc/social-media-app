@@ -23,7 +23,7 @@ class ChatScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
                 child: Container(
                   color: const Color.fromARGB(189, 186, 185, 185),
-                  height: height * 0.075,
+                  height: height * 0.07,
                   child: Column(
                     children: [
                       Row(

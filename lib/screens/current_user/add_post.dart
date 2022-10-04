@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/bottom/bottom.dart';
-import 'package:socio/screens/current_user/profile.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/current_user/widget/add_caption.dart';
 import 'package:socio/screens/theme/theme_mode.dart';

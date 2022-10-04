@@ -28,11 +28,11 @@ class _MyPostsState extends State<MyPosts> {
     final width = MediaQuery.of(context).size.width;
     log('PROFILE BUILDED');
     context.read<CurrentUserProvider>().pCount =
-        context.watch<CurrentUserProvider>().MyDetails!.currentUserPosts.length;
+        context.watch<CurrentUserProvider>().MyDetails!.posts.length;
     log("callig repeatedly");
     return Consumer<CurrentUserProvider>(
       builder: (context, value, child) {
-        return value.MyDetails!.currentUserPosts.isEmpty
+        return value.MyDetails!.posts.isEmpty
             ? Align(
                 alignment: Alignment.topCenter,
                 child: Column(
@@ -47,7 +47,7 @@ class _MyPostsState extends State<MyPosts> {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                 ),
-                itemCount: value.MyDetails!.currentUserPosts.length,
+                itemCount: value.MyDetails!.posts.length,
                 itemBuilder: (BuildContext context, int index) {
                   return value.MyDetails == null
                       ? Center(child: const CircularProgressIndicator())
@@ -63,8 +63,8 @@ class _MyPostsState extends State<MyPosts> {
                               width: width * 0.1,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: NetworkImage(value.MyDetails!
-                                          .currentUserPosts[index].image),
+                                      image: NetworkImage(
+                                          value.MyDetails!.posts[index].image),
                                       fit: BoxFit.cover),
                                   borderRadius: BorderRadius.circular(30),
                                   color: Colors.black),

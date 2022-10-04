@@ -13,9 +13,14 @@ Widget text(text, color, sizes, weight, maxlines) {
 }
 
 Widget text1(text,
-    {Color? color, double? sizes, FontWeight? weight, int? maxlines}) {
+    {Color? color,
+    double? sizes,
+    FontWeight? weight,
+    int? maxlines,
+    TextOverflow? overflow}) {
   return Text(
     text,
+    overflow: overflow,
     style: TextStyle(
         color: color,
         fontSize: sizes,

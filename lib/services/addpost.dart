@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:socio/helperfunction/helper_function.dart';
-import 'package:socio/screens/current_user/model/post_model.dart';
+import 'package:socio/screens/current_user/model/timeline_post_model.dart';
 
 import '../api/api_endpoints.dart';
 
-class Post {
+class PostServises {
   Future<String?> uploadImage(
       PostDetails postDetails, PostImage Postimage) async {
     try {

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
-import 'package:socio/widgets/alertdialog.dart';
 
 class TagScreen extends StatelessWidget {
   const TagScreen({Key? key}) : super(key: key);

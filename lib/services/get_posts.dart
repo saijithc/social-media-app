@@ -2,14 +2,14 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:socio/api/api_endpoints.dart';
 import 'package:socio/helperfunction/helper_function.dart';
-import 'package:socio/screens/current_user/model/post_model.dart';
+import 'package:socio/screens/current_user/model/timeline_post_model.dart';
 
 class GetPosts {
   Future<List<GetPostModel>?> GetTimelinePosts() async {
     try {
       final id = await HelperFuction.getUserid();
       final authToken = await HelperFuction.getToken();
-      final token = {"authtoken": authToken};
+      final token = {"AuthToken": authToken};
       log("this is my auth token" + token.toString());
       Response response = await Dio().get("${Api.baseUrl}/post/timeline/${id}",
           options: Options(headers: token));

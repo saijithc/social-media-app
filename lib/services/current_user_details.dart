@@ -6,14 +6,20 @@ import 'package:socio/helperfunction/helper_function.dart';
 import 'package:socio/screens/current_user/model/current_user_details.dart';
 
 class CurrentUserDetails {
-  Future<GetCurrentUserPostModel?> getUserDetails() async {
+  Future<UserDetails?> getUserDetails() async {
     try {
       log("CurrentUserDetails");
       final id = await HelperFuction.getUserid();
+      log("this is my Id =" + id.toString());
       Response response = await Dio().get("${Api.baseUrl}/user/${id}");
       if (response.statusCode! > 199 || response.statusCode! < 300) {
         log("sucess ++");
-        return GetCurrentUserPostModel.fromJson(response.data);
+        log("response =" + response.data.toString());
+        // log("why " +
+        //     GetCurrentUserPostModel.fromJson(response.data).toString());
+        final details = GetCurrentUserPostModel.fromJson(response.data);
+        log("return details =" + details.toString());
+        return details.userDetails;
       } else {
         log(response.statusCode.toString());
       }

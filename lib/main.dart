@@ -9,6 +9,7 @@ import 'package:socio/screens/google/provider/provider.dart';
 import 'package:socio/screens/other_users/provider/provider.dart';
 import 'package:socio/screens/splash/provider/provider.dart';
 import 'package:socio/screens/splash/view/splash.dart';
+import 'package:socio/screens/suggestions/provider/suggestion_provider.dart';
 import 'package:socio/screens/theme/themes.dart';
 
 import 'screens/bottom/Provider/bottom_provider.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
     log('my app called');
     return MultiProvider(
         providers: [
+          ChangeNotifierProvider(create: (_) => SuggestionProvider()),
           ChangeNotifierProvider(create: (_) => LoginProvider()),
           ChangeNotifierProvider(create: (_) => OtpProvider()),
           ChangeNotifierProvider(create: (_) => SignupProvider()),

@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 class PostDetails {
   String? caption;
   String userId = '';
@@ -96,7 +94,7 @@ class UserId {
     required this.username,
     required this.fullname,
     required this.email,
-    required this.phoneNumber,
+    this.phoneNumber,
     required this.password,
     required this.avatar,
     required this.bio,
@@ -114,7 +112,7 @@ class UserId {
   final String username;
   final String fullname;
   final String email;
-  final int phoneNumber;
+  final int? phoneNumber;
   final String password;
   final String avatar;
   final String bio;

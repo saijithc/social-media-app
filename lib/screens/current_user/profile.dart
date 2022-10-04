@@ -1,18 +1,12 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socio/screens/current_user/model/current_user_details.dart';
 import 'package:socio/screens/current_user/myposts.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
-import 'package:socio/screens/current_user/settings.dart';
-import 'package:socio/widgets/buttons.dart';
 import 'package:socio/widgets/counts.dart';
-import 'package:socio/widgets/edit_&_add_profilebutton.dart';
+import 'package:socio/widgets/fabicon.dart';
 import 'package:socio/widgets/text.dart';
-
 import '../theme/theme_mode.dart';
-import 'add_post.dart';
 import 'highlights.dart';
 import 'tags.dart';
 
@@ -54,17 +48,17 @@ class _ProfileScreenState extends State<ProfileScreen>
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
             excludeHeaderSemantics: true,
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) => const Settings()));
-                  },
-                  icon: const Icon(
-                    Icons.settings_outlined,
-                    size: 25,
-                  ))
-            ],
+            // actions: [
+            //   IconButton(
+            //       onPressed: () {
+            //         Navigator.of(context).push(MaterialPageRoute(
+            //             builder: (ctx) => const Settings()));
+            //       },
+            //       icon: const Icon(
+            //         Icons.settings_outlined,
+            //         size: 25,
+            //       ))
+            // ],
             elevation: 0,
             backgroundColor: const Color.fromARGB(55, 138, 138, 138),
             title: text1(
@@ -87,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(50),
                                     bottomRight: Radius.circular(50))),
-                            height: height * 0.35,
+                            height: height * 0.28,
                             width: width,
                             child: Column(
                               children: [
@@ -107,10 +101,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           width: width * 0.22,
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
-                                                  image: NetworkImage(value
-                                                      .MyDetails!
-                                                      .otherDetails
-                                                      .avatar),
+                                                  image: NetworkImage(
+                                                      value.MyDetails!.avatar),
                                                   fit: BoxFit.cover),
                                               borderRadius:
                                                   BorderRadius.circular(30)),
@@ -121,29 +113,28 @@ class _ProfileScreenState extends State<ProfileScreen>
                                             CrossAxisAlignment.start,
                                         children: [
                                           text1(
-                                            value.MyDetails!.otherDetails
-                                                .fullname,
+                                            value.MyDetails!.fullname,
                                             sizes: height * 0.025,
                                             weight: FontWeight.bold,
                                           ),
                                           SizedBox(
                                             height: height * 0.01,
                                           ),
-                                          text1(
-                                              value.MyDetails!.otherDetails.bio,
+                                          text1(value.MyDetails!.bio,
                                               sizes: height * 0.015,
-                                              weight: FontWeight.w300)
+                                              weight: FontWeight.w300,
+                                              maxlines: 5)
                                         ],
                                       )
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: height * 0.02,
-                                ),
-                                EditAndAddButtons(context),
-                                SizedBox(height: height * 0.048),
-                                Counts(context, value)
+                                // SizedBox(
+                                //   height: height * 0.02,
+                                // ),
+                                // EditAndAddButtons(context),
+                                SizedBox(height: height * 0.05),
+                                Counts(context)
                               ],
                             ),
                           ),
@@ -200,6 +191,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   ),
                 ),
               ),
+        floatingActionButton: FabiconButton(),
       ),
     );
   }

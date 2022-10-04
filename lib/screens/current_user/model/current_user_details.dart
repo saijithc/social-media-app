@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 GetCurrentUserPostModel getCurrentUserPostModelFromJson(String str) =>
@@ -8,29 +9,99 @@ String getCurrentUserPostModelToJson(GetCurrentUserPostModel data) =>
 
 class GetCurrentUserPostModel {
   GetCurrentUserPostModel({
-    required this.otherDetails,
-    required this.currentUserPosts,
+    required this.userDetails,
   });
 
-  final OtherDetails otherDetails;
-  final List<CurrentUserPost> currentUserPosts;
+  final UserDetails userDetails;
 
   factory GetCurrentUserPostModel.fromJson(Map<String, dynamic> json) =>
       GetCurrentUserPostModel(
-        otherDetails: OtherDetails.fromJson(json["otherDetails"]),
-        currentUserPosts: List<CurrentUserPost>.from(
-            json["currentUserPosts"].map((x) => CurrentUserPost.fromJson(x))),
+        userDetails: UserDetails.fromJson(json["userDetails"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "otherDetails": otherDetails.toJson(),
-        "currentUserPosts":
-            List<dynamic>.from(currentUserPosts.map((x) => x.toJson())),
+        "userDetails": userDetails.toJson(),
       };
 }
 
-class CurrentUserPost {
-  CurrentUserPost({
+class UserDetails {
+  UserDetails({
+    required this.id,
+    required this.username,
+    required this.fullname,
+    required this.email,
+    required this.phoneNumber,
+    required this.avatar,
+    required this.bio,
+    required this.posts,
+    required this.followers,
+    required this.saved,
+    required this.following,
+    required this.private,
+    required this.blocked,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.v,
+  });
+
+  final String id;
+  final String username;
+  final String fullname;
+  final String email;
+  final dynamic phoneNumber;
+  final String avatar;
+  final String bio;
+  final List<Post> posts;
+  final List<dynamic> followers;
+  final List<dynamic> saved;
+  final List<String> following;
+  final bool private;
+  final bool blocked;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final int v;
+
+  factory UserDetails.fromJson(Map<String, dynamic> json) => UserDetails(
+        id: json["_id"],
+        username: json["username"],
+        fullname: json["fullname"],
+        email: json["email"],
+        phoneNumber: json["phoneNumber"],
+        avatar: json["avatar"],
+        bio: json["bio"],
+        posts: List<Post>.from(json["posts"].map((x) => Post.fromJson(x))),
+        followers: List<dynamic>.from(json["followers"].map((x) => x)),
+        saved: List<dynamic>.from(json["saved"].map((x) => x)),
+        following: List<String>.from(json["following"].map((x) => x)),
+        private: json["private"],
+        blocked: json["blocked"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "username": username,
+        "fullname": fullname,
+        "email": email,
+        "phoneNumber": phoneNumber,
+        "avatar": avatar,
+        "bio": bio,
+        "posts": List<dynamic>.from(posts.map((x) => x.toJson())),
+        "followers": List<dynamic>.from(followers.map((x) => x)),
+        "saved": List<dynamic>.from(saved.map((x) => x)),
+        "following": List<dynamic>.from(following.map((x) => x)),
+        "private": private,
+        "blocked": blocked,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "__v": v,
+      };
+}
+
+class Post {
+  Post({
     required this.id,
     required this.userId,
     required this.image,
@@ -56,8 +127,7 @@ class CurrentUserPost {
   final DateTime updatedAt;
   final int v;
 
-  factory CurrentUserPost.fromJson(Map<String, dynamic> json) =>
-      CurrentUserPost(
+  factory Post.fromJson(Map<String, dynamic> json) => Post(
         id: json["_id"],
         userId: json["userId"],
         image: json["image"],
@@ -83,77 +153,5 @@ class CurrentUserPost {
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "__v": v,
-      };
-}
-
-class OtherDetails {
-  OtherDetails({
-    required this.id,
-    required this.username,
-    required this.fullname,
-    required this.email,
-    required this.phoneNumber,
-    required this.avatar,
-    required this.bio,
-    required this.followers,
-    required this.saved,
-    required this.following,
-    required this.private,
-    required this.blocked,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
-  });
-
-  final String id;
-  final String username;
-  final String fullname;
-  final String email;
-  final int phoneNumber;
-  final String avatar;
-  final String bio;
-  final List<dynamic> followers;
-  final List<dynamic> saved;
-  final List<dynamic> following;
-  final bool private;
-  final bool blocked;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final int v;
-
-  factory OtherDetails.fromJson(Map<String, dynamic> json) => OtherDetails(
-        id: json["_id"],
-        username: json["username"],
-        fullname: json["fullname"],
-        email: json["email"],
-        phoneNumber: json["phoneNumber"],
-        avatar: json["avatar"],
-        bio: json["bio"],
-        followers: List<dynamic>.from(json["followers"].map((x) => x)),
-        saved: List<dynamic>.from(json["saved"].map((x) => x)),
-        following: List<dynamic>.from(json["following"].map((x) => x)),
-        private: json["private"],
-        blocked: json["blocked"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "username": username,
-        "fullname": fullname,
-        "email": email,
-        "phoneNumber": phoneNumber,
-        "avatar": avatar,
-        "bio": bio,
-        "followers": List<dynamic>.from(followers.map((x) => x)),
-        "saved": List<dynamic>.from(saved.map((x) => x)),
-        "following": List<dynamic>.from(following.map((x) => x)),
-        "private": private,
-        "blocked": blocked,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "__v": v
       };
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
-import 'package:provider/provider.dart';
 import '../screens/current_user/provider/provider.dart';
 import 'like_button.dart';
 import 'options.dart';
@@ -30,52 +29,35 @@ customAlert(BuildContext context, CurrentUserProvider value, int index) {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5, bottom: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            height: height * 0.05,
-                            width: width * 0.1,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        value.MyDetails!.otherDetails.avatar),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          text(value.MyDetails!.otherDetails.fullname,
-                              Colors.white, height * 0.02, FontWeight.w700, 1),
-                          SizedBox(
-                            width: width * 0.08,
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              text(
-                                  value.MyDetails!.otherDetails.updatedAt
-                                      .toString(),
-                                  const Color.fromARGB(207, 253, 247, 247),
-                                  height * 0.01,
-                                  FontWeight.w400,
-                                  1),
-                              // SizedBox(
-                              //   width: width * 0.1,
-                              // ),
-                              IconButton(
-                                  onPressed: () {
-                                    options(context);
-                                  },
-                                  icon: const Icon(
-                                    Icons.more_vert,
-                                    color: Colors.white,
-                                  ))
-                            ],
-                          ),
-                        ],
+                    ListTile(
+                      leading: Container(
+                        height: height * 0.06,
+                        width: width * 0.13,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(value.MyDetails!.avatar),
+                                fit: BoxFit.cover),
+                            borderRadius: BorderRadius.circular(10)),
                       ),
+                      title: text1(value.MyDetails!.fullname,
+                          color: Colors.white,
+                          sizes: height * 0.017,
+                          weight: FontWeight.w700,
+                          overflow: TextOverflow.ellipsis),
+                      subtitle: text(
+                          value.MyDetails!.updatedAt.toString(),
+                          const Color.fromARGB(207, 253, 247, 247),
+                          height * 0.01,
+                          FontWeight.w400,
+                          1),
+                      trailing: IconButton(
+                          onPressed: () {
+                            options(context, value.MyDetails!.posts[index].id);
+                          },
+                          icon: const Icon(
+                            Icons.more_vert,
+                            color: Colors.white,
+                          )),
                     ),
                     Center(
                       child: PinchZoomReleaseUnzoomWidget(
@@ -84,8 +66,8 @@ customAlert(BuildContext context, CurrentUserProvider value, int index) {
                           width: width * 0.85,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(value.MyDetails!
-                                      .currentUserPosts[index].image),
+                                  image: NetworkImage(
+                                      value.MyDetails!.posts[index].image),
                                   fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(30)),
                         ),
@@ -99,8 +81,7 @@ customAlert(BuildContext context, CurrentUserProvider value, int index) {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: text(
-                                value
-                                    .MyDetails!.currentUserPosts[index].caption,
+                                value.MyDetails!.posts[index].caption,
                                 Colors.white,
                                 height * 0.014,
                                 FontWeight.bold,
@@ -112,13 +93,10 @@ customAlert(BuildContext context, CurrentUserProvider value, int index) {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        likeButton(
-                            context: context,
-                            id: value.MyDetails!.currentUserPosts[index].id,
-                            likes:
-                                value.MyDetails!.currentUserPosts[index].likes,
-                            count: value
-                                .MyDetails!.currentUserPosts[index].likes.length
+                        LikseButton(
+                            id: value.MyDetails!.posts[index].id,
+                            likes: value.MyDetails!.posts[index].likes,
+                            count: value.MyDetails!.posts[index].likes.length
                                 .toString()),
                         SizedBox(
                           width: width * 0.05,

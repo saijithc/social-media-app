@@ -2,12 +2,15 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:socio/helperfunction/helper_function.dart';
 import 'package:socio/screens/bottom/bottom.dart';
 import 'package:socio/screens/current_user/model/current_user_details.dart';
-import 'package:socio/screens/current_user/model/post_model.dart';
+import 'package:socio/screens/current_user/model/timeline_post_model.dart';
+import 'package:socio/screens/suggestions/provider/suggestion_provider.dart';
 import 'package:socio/services/addpost.dart';
 import 'package:socio/services/current_user_details.dart';
+import 'package:socio/services/delete_post.dart';
 import 'package:socio/services/get_posts.dart';
 import 'package:socio/widgets/custom_snackbar.dart';
 
@@ -17,7 +20,7 @@ class CurrentUserProvider with ChangeNotifier {
   int tCount = 0;
   File? image;
   bool isLoading = false;
-  GetCurrentUserPostModel? MyDetails;
+  UserDetails? MyDetails;
   // List<GetCurrentUserPostModel> MyDetails = [];
   List<GetPostModel> POSTS = [];
   final TextEditingController captionController = TextEditingController();
@@ -68,7 +71,7 @@ class CurrentUserProvider with ChangeNotifier {
     final postImage = PostImage(image: image!);
     log("this is userId" + postDetails.userId);
     log("this is the caption" + postDetails.caption.toString());
-    Post().uploadImage(postDetails, postImage).then((value) {
+    PostServises().uploadImage(postDetails, postImage).then((value) {
       if (value == 'sucess') {
         captionController.clear();
         isLoading = false;
@@ -88,15 +91,40 @@ class CurrentUserProvider with ChangeNotifier {
     });
   }
 
-  Future getPost() async {
+  Future getPost(BuildContext context) async {
     POSTS = await GetPosts().GetTimelinePosts() ?? [];
-    // log(POSTS.toString());
+    context.read<SuggestionProvider>().getSuggetions();
     notifyListeners();
   }
 
   Future getMyProfileDetai() async {
-    MyDetails = await CurrentUserDetails().getUserDetails();
-    log("this is my details" + MyDetails.toString());
+    log("details " + CurrentUserDetails().getUserDetails().toString());
+    CurrentUserDetails().getUserDetails().then((value) {
+      log("this is value" + value.toString());
+      MyDetails = value;
+      log("this is my details" + MyDetails.toString());
+      notifyListeners();
+    });
+  }
+
+  deletePost(BuildContext context, postId) {
+    isLoading = true;
     notifyListeners();
+    DeletePostApi().deletePost(postId).then((value) {
+      if (value == "sucess") {
+        isLoading = false;
+        notifyListeners();
+        customSnackBar(context, "Post Deleted sucessfully");
+        getMyProfileDetai();
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (ctx) => Bottom()));
+      } else {
+        isLoading = false;
+        notifyListeners();
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (ctx) => Bottom()));
+        customSnackBar(context, value.toString());
+      }
+    });
   }
 }

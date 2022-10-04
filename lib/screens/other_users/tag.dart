@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/other_users/provider/provider.dart';
-import 'package:socio/widgets/alertdialog.dart';
 
 class FollowersTagScreen extends StatelessWidget {
   const FollowersTagScreen({Key? key}) : super(key: key);
