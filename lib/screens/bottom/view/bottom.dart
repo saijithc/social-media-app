@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/bottom/Provider/bottom_provider.dart';
+import 'package:socio/screens/current_user/provider/provider.dart';
 
-import '../chats /chat.dart';
-import '../current_user/profile.dart';
-import '../home /home.dart';
-import '../likes/likes.dart';
-import '../search/search.dart';
-import '../theme/theme_mode.dart';
+import '../../chats /chat.dart';
+import '../../current_user/profile.dart';
+import '../../home /home.dart';
+import '../../likes/likes.dart';
+import '../../search/search.dart';
+import '../../theme/theme_mode.dart';
 
 class Bottom extends StatefulWidget {
   const Bottom({Key? key}) : super(key: key);
@@ -24,6 +25,12 @@ class _BottomState extends State<Bottom> {
     const Likes(),
     const ProfileScreen()
   ];
+  @override
+  void initState() {
+    getMyDetails();
+    super.initState();
+  }
+
   // int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -79,5 +86,9 @@ class _BottomState extends State<Bottom> {
         }),
       ),
     );
+  }
+
+  void getMyDetails() {
+    context.read<CurrentUserProvider>().getMyProfileDetai();
   }
 }

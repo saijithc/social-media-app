@@ -1,10 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/helperfunction/helper_function.dart';
-import 'package:socio/screens/bottom/bottom.dart';
+import 'package:socio/screens/bottom/view/bottom.dart';
 import 'package:socio/screens/current_user/model/current_user_details.dart';
 import 'package:socio/screens/current_user/model/timeline_post_model.dart';
 import 'package:socio/screens/suggestions/provider/suggestion_provider.dart';
@@ -13,15 +14,19 @@ import 'package:socio/services/current_user_details.dart';
 import 'package:socio/services/delete_post.dart';
 import 'package:socio/services/get_posts.dart';
 import 'package:socio/widgets/custom_snackbar.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class CurrentUserProvider with ChangeNotifier {
   double? tabViewheight;
+  bool isFollowing = false;
   int pCount = 0;
   int tCount = 0;
   File? image;
+  File? croppedImage;
+  bool noNetwork = false;
   bool isLoading = false;
+  bool isPostLoading = false;
   UserDetails? MyDetails;
-  // List<GetCurrentUserPostModel> MyDetails = [];
   List<GetPostModel> POSTS = [];
   final TextEditingController captionController = TextEditingController();
   setPMode(context) {
@@ -46,18 +51,42 @@ class CurrentUserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  pickImageFromCamera(ImageSource source) async {
+  pickImage(ImageSource source) async {
     try {
       XFile? pickedImage = await ImagePicker().pickImage(
           source: source, imageQuality: 80, maxHeight: 1080, maxWidth: 1080);
       if (pickedImage != null) {
         image = File(pickedImage.path);
         notifyListeners();
+        cropImage(image!);
       }
-      //  img = pickedImage!.name;
-
     } catch (e) {
       log(e.toString());
+    }
+  }
+
+  cropImage(File pickedImage) async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
+      sourcePath: pickedImage.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio7x5,
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: true),
+        IOSUiSettings(
+          title: 'Cropper',
+        ),
+      ],
+    );
+    if (croppedFile != null) {
+      croppedImage = File(croppedFile.path);
+      notifyListeners();
     }
   }
 
@@ -68,7 +97,7 @@ class CurrentUserProvider with ChangeNotifier {
     final id = await HelperFuction.getUserid();
     final postDetails =
         PostDetails(caption: captionController.text, userId: id.toString());
-    final postImage = PostImage(image: image!);
+    final postImage = PostImage(image: croppedImage!);
     log("this is userId" + postDetails.userId);
     log("this is the caption" + postDetails.caption.toString());
     PostServises().uploadImage(postDetails, postImage).then((value) {
@@ -78,7 +107,7 @@ class CurrentUserProvider with ChangeNotifier {
         getMyProfileDetai();
         notifyListeners();
         customSnackBar(context, "Post Created Successfully");
-
+        croppedImage = null;
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (ctx) => const Bottom()));
         getMyProfileDetai();
@@ -92,17 +121,34 @@ class CurrentUserProvider with ChangeNotifier {
   }
 
   Future getPost(BuildContext context) async {
+    isPostLoading = true;
+    notifyListeners();
+
     POSTS = await GetPosts().GetTimelinePosts() ?? [];
     context.read<SuggestionProvider>().getSuggetions();
+    isPostLoading = false;
+    notifyListeners();
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      noNetwork = true;
+      notifyListeners();
+    }
+  }
+
+  checkFollowed(id) {
+    if (MyDetails!.following.contains(id)) {
+      isFollowing = true;
+    } else {
+      isFollowing = false;
+    }
     notifyListeners();
   }
 
   Future getMyProfileDetai() async {
-    log("details " + CurrentUserDetails().getUserDetails().toString());
-    CurrentUserDetails().getUserDetails().then((value) {
-      log("this is value" + value.toString());
+    final id = await HelperFuction.getUserid();
+    CurrentUserDetails().getUserDetails(id).then((value) {
       MyDetails = value;
-      log("this is my details" + MyDetails.toString());
+
       notifyListeners();
     });
   }
@@ -114,8 +160,8 @@ class CurrentUserProvider with ChangeNotifier {
       if (value == "sucess") {
         isLoading = false;
         notifyListeners();
-        customSnackBar(context, "Post Deleted sucessfully");
         getMyProfileDetai();
+        customSnackBar(context, "Post Deleted sucessfully");
         Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (ctx) => Bottom()));
       } else {

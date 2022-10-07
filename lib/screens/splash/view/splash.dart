@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/helperfunction/helper_function.dart';
@@ -16,15 +17,20 @@ class SplashScreen extends StatelessWidget {
     final h = MediaQuery.of(context).size.height;
     context.read<SplashProvider>().gotoHome(context, isLogged);
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         body: Center(
-          child: Container(
-            height: h * 0.06,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/logo.png"),
-              ),
+          child: TextLiquidFill(
+            text: 'TAILUS',
+            waveColor: Colors.white
+            // Color.fromARGB(255, 68, 255, 255)
+            ,
+            // boxBackgroundColor: Colors.redAccent,
+            textStyle: TextStyle(
+              fontStyle: FontStyle.italic,
+              fontSize: 80.0,
+              fontWeight: FontWeight.bold,
             ),
+            boxHeight: 300.0,
           ),
         ));
   }

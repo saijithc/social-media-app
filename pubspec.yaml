@@ -45,6 +45,9 @@ dependencies:
   pinch_zoom_release_unzoom: ^0.0.8
   http_parser: ^4.0.1
   fab_circular_menu: ^1.0.2
+  animated_text_kit: ^4.2.2
+  connectivity_plus: ^2.3.8
+  image_cropper: ^3.0.0
  
   # flutter_staggered_animations: ^1.0.0
 

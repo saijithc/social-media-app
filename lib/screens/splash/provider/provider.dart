@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:socio/helperfunction/helper_function.dart';
 import 'package:socio/screens/current_user/model/user.dart';
-import '../../bottom/bottom.dart';
+import '../../bottom/view/bottom.dart';
 import '../../login_activities/view/login.dart';
 
 class SplashProvider with ChangeNotifier {
@@ -12,7 +12,7 @@ class SplashProvider with ChangeNotifier {
     // log("token called" + token);
     if (HelperFuction.value == 2) {
       Timer(
-          const Duration(seconds: 4),
+          const Duration(seconds: 6),
           () => Navigator.of(context)
                   .pushReplacement(MaterialPageRoute(
                       builder: (ctx) =>

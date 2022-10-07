@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:socio/screens/other_users/followers_profile.dart';
 import 'package:socio/services/get_posts.dart';
 import 'package:socio/widgets/text.dart';
 
@@ -26,8 +25,9 @@ class Likes extends StatelessWidget {
           return ListTile(
             leading: GestureDetector(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (ctx) => const FollowersProfile()));
+                //TODO
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (ctx) => const FollowersProfile()));
               },
               child: Container(
                 height: height * 0.065,

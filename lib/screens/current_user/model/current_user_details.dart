@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 GetCurrentUserPostModel getCurrentUserPostModelFromJson(String str) =>

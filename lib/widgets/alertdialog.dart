@@ -13,6 +13,7 @@ customAlert(BuildContext context, CurrentUserProvider value, int index) {
     context: context,
     builder: (context) {
       return AlertDialog(
+        scrollable: true,
         insetPadding:
             EdgeInsets.only(top: height * 0.08, bottom: height * 0.08),
         contentPadding: const EdgeInsets.all(0),
@@ -61,15 +62,10 @@ customAlert(BuildContext context, CurrentUserProvider value, int index) {
                     ),
                     Center(
                       child: PinchZoomReleaseUnzoomWidget(
-                        child: Container(
-                          height: height * 0.5,
-                          width: width * 0.85,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      value.MyDetails!.posts[index].image),
-                                  fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(30)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 3, right: 3),
+                          child: Image.network(
+                              value.MyDetails!.posts[index].image),
                         ),
                       ),
                     ),

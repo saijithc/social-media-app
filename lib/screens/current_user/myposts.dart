@@ -56,6 +56,7 @@ class _MyPostsState extends State<MyPosts> {
                           child: GestureDetector(
                             onTap: () {
                               value.getMyProfileDetai();
+                              value.getPost(context);
                               customAlert(context, value, index);
                             },
                             child: Container(

@@ -48,17 +48,6 @@ class _ProfileScreenState extends State<ProfileScreen>
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
             excludeHeaderSemantics: true,
-            // actions: [
-            //   IconButton(
-            //       onPressed: () {
-            //         Navigator.of(context).push(MaterialPageRoute(
-            //             builder: (ctx) => const Settings()));
-            //       },
-            //       icon: const Icon(
-            //         Icons.settings_outlined,
-            //         size: 25,
-            //       ))
-            // ],
             elevation: 0,
             backgroundColor: const Color.fromARGB(55, 138, 138, 138),
             title: text1(

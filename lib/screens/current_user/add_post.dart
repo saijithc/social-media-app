@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socio/screens/bottom/bottom.dart';
+import 'package:socio/screens/bottom/view/bottom.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/current_user/widget/add_caption.dart';
 import 'package:socio/screens/theme/theme_mode.dart';
@@ -17,6 +17,7 @@ class AddPost extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
             onPressed: () {
+              context.read<CurrentUserProvider>().croppedImage = null;
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (ctx) => const Bottom()));
             },
@@ -40,16 +41,17 @@ class AddPost extends StatelessWidget {
                         width: w * 0.85,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                              image:
-                                  context.watch<CurrentUserProvider>().image ==
-                                          null
-                                      ? const AssetImage(
-                                          "assets/avatar.png",
-                                        )
-                                      : Image.file(context
-                                              .read<CurrentUserProvider>()
-                                              .image!)
-                                          .image,
+                              image: context
+                                          .watch<CurrentUserProvider>()
+                                          .croppedImage ==
+                                      null
+                                  ? const AssetImage(
+                                      "assets/avatar.png",
+                                    )
+                                  : Image.file(context
+                                          .read<CurrentUserProvider>()
+                                          .croppedImage!)
+                                      .image,
                               fit: BoxFit.cover),
                           color: value.thememode == ThemeMode.dark
                               ? Colors.white
@@ -77,7 +79,9 @@ class AddPost extends StatelessWidget {
                             onPressed: () {
                               choose(context);
                             },
-                            child: context.watch<CurrentUserProvider>().image ==
+                            child: context
+                                        .watch<CurrentUserProvider>()
+                                        .croppedImage ==
                                     null
                                 ? const Text("Add image")
                                 : const Text('Add another')),
@@ -87,7 +91,9 @@ class AddPost extends StatelessWidget {
                       ),
                       SizedBox(
                         width: w * 0.85,
-                        child: context.watch<CurrentUserProvider>().image ==
+                        child: context
+                                    .watch<CurrentUserProvider>()
+                                    .croppedImage ==
                                 null
                             ? const Text('')
                             : ElevatedButton(

@@ -5,28 +5,29 @@ import 'package:socio/api/api_endpoints.dart';
 
 import '../helperfunction/helper_function.dart';
 
-class FollowAndUnfollow {
-  followAndUnfollow(id) async {
+class ReportApi {
+  reportPost(postId) async {
     try {
-      final myid = await HelperFuction.getUserid();
-      final userId = {"userId": myid};
+      final id = await HelperFuction.getUserid();
       final authToken = await HelperFuction.getToken();
       final token = {"AuthToken": authToken};
-      Response response = await Dio().put("${Api.baseUrl}/user/follow/${id}",
-          data: userId, options: Options(headers: token));
+      Response response = await Dio().post(
+          "${Api.baseUrl}/post/reportPost/${postId}",
+          data: id,
+          options: Options(headers: token));
       if (response.statusCode! > 199 || response.statusCode! < 300) {
         log(response.data);
+        log(response.statusMessage.toString());
         log(response.statusCode!.toString());
       } else {
-        log(response.data);
         log(response.statusCode!.toString());
       }
     } catch (e) {
       if (e is DioError) {
         log(e.message);
-      } else {
-        log(e.toString());
+        log(e.type.toString());
       }
+      log(e.toString());
     }
   }
 }

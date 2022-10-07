@@ -30,7 +30,7 @@ choose(BuildContext context) {
                           onPressed: () {
                             context
                                 .read<CurrentUserProvider>()
-                                .pickImageFromCamera(ImageSource.camera);
+                                .pickImage(ImageSource.camera);
                             Navigator.pop(context);
                           },
                           icon: const Icon(
@@ -47,7 +47,7 @@ choose(BuildContext context) {
                           onPressed: () {
                             context
                                 .read<CurrentUserProvider>()
-                                .pickImageFromCamera(ImageSource.gallery);
+                                .pickImage(ImageSource.gallery);
                             Navigator.pop(context);
                           },
                           icon: const Icon(

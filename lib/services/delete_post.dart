@@ -29,5 +29,6 @@ class DeletePostApi {
         log(e.toString());
       }
     }
+    return null;
   }
 }

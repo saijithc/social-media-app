@@ -1,11 +1,17 @@
 import 'package:flutter/widgets.dart';
 import 'package:socio/services/like_post.dart';
+import 'package:socio/services/report.dart';
+
+import '../../../services/current_user_details.dart';
+import '../../current_user/model/current_user_details.dart';
 
 class FollowersProvider with ChangeNotifier {
   double? tabviewHeight;
   int pCount = 0;
   int tCount = 0;
   bool like = false;
+  UserDetails? profileDetails;
+  bool isReporting = false;
   setPMode(context) {
     setTabviewHeight(context: context, childCount: pCount, crossAxisCount: 2);
   }
@@ -27,33 +33,26 @@ class FollowersProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  getFollowerProfileDetails(id) {
+    profileDetails = null;
+    CurrentUserDetails().getUserDetails(id).then((value) {
+      profileDetails = value;
+      notifyListeners();
+    });
+  }
+
   getPostLike(id) {
     like = !like;
     notifyListeners();
     LikePost().likePost(id);
   }
-  // getPostLike(id) {
-  //   checkLike() {
-  //     like = !like;
-  //     notifyListeners();
-  //   }
 
-  //   LikePost().likePost(id).then((value) {
-  //     if (like == false || value == "Post liked") {
-  //       like = true;
-  //       notifyListeners();
-  //     }
-  //   }
-  //   );
-  // }
+  reportPost(postId) {
+    isReporting = true;
+    notifyListeners();
+    ReportApi().reportPost(postId).then(() {
+      isReporting = false;
+      notifyListeners();
+    });
+  }
 }
-// getPostLike(id) { 
-//     like = !like;
-//     notifyListeners();
-//     LikePost().likePost(id);
-//   }
-
-  // checkLike() {
-  //     like = !like;
-  //     notifyListeners();
-  //   }

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
+import 'package:socio/screens/other_users/provider/provider.dart';
 import 'package:socio/widgets/more.dart';
 import 'package:socio/widgets/text.dart';
 
-followersPosts(BuildContext context) {
+import 'like_button.dart';
+
+followersPosts(BuildContext context, FollowersProvider value, int index) {
   final height = MediaQuery.of(context).size.height;
   final width = MediaQuery.of(context).size.width;
   return showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
+        scrollable: true,
         insetPadding:
             EdgeInsets.only(top: height * 0.08, bottom: height * 0.08),
         contentPadding: const EdgeInsets.all(0),
@@ -26,63 +30,44 @@ followersPosts(BuildContext context) {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5, bottom: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            height: height * 0.05,
-                            width: width * 0.1,
-                            decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                    image: AssetImage(
-                                        "assets/Stall  - Chapter 45_.png"),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          text("harrystyles", Colors.white, height * 0.02,
-                              FontWeight.w700, 1),
-                          SizedBox(
-                            width: width * 0.08,
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              text(
-                                  "2hours ago",
-                                  const Color.fromARGB(207, 253, 247, 247),
-                                  height * 0.01,
-                                  FontWeight.w400,
-                                  1),
-                              // SizedBox(
-                              //   width: width * 0.1,
-                              // ),
-                              IconButton(
-                                  onPressed: () {
-                                    more(context);
-                                  },
-                                  icon: const Icon(
-                                    Icons.more_vert,
-                                    color: Colors.white,
-                                  ))
-                            ],
-                          ),
-                        ],
+                    ListTile(
+                      leading: Container(
+                        height: height * 0.06,
+                        width: width * 0.13,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                    NetworkImage(value.profileDetails!.avatar),
+                                fit: BoxFit.cover),
+                            borderRadius: BorderRadius.circular(10)),
                       ),
+                      title: text1(value.profileDetails!.fullname,
+                          color: Colors.white,
+                          sizes: height * 0.017,
+                          weight: FontWeight.w700,
+                          overflow: TextOverflow.ellipsis),
+                      subtitle: text(
+                          value.profileDetails!.updatedAt.toString(),
+                          const Color.fromARGB(207, 253, 247, 247),
+                          height * 0.01,
+                          FontWeight.w400,
+                          1),
+                      trailing: IconButton(
+                          onPressed: () {
+                            more(
+                                context, value.profileDetails!.posts[index].id);
+                          },
+                          icon: const Icon(
+                            Icons.more_vert,
+                            color: Colors.white,
+                          )),
                     ),
                     Center(
                       child: PinchZoomReleaseUnzoomWidget(
-                        child: Container(
-                          height: height * 0.5,
-                          width: width * 0.85,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                      "assets/wheels on the bus ➸ [larry au] - ღ chapter two ღ.jpeg"),
-                                  fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(30)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 3, right: 3),
+                          child: Image.network(
+                              value.profileDetails!.posts[index].image),
                         ),
                       ),
                     ),
@@ -90,12 +75,11 @@ followersPosts(BuildContext context) {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          // height: height * 0.05,
                           width: width * 0.8,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: text(
-                                "Love on tour,New York City😋..jhfdkjhkdhdkkdkffhfggkhdfgihkdfg      khjjkdscvhjks ihjkdsxcvn nm iuhdcfvjnbxdcb biuhdfkn hihidfgiihdfghkjhfgdhffhlfhgiejjfdfhkhdkjfggkdfghdkfgdgdfgigurgjeoj",
+                                value.profileDetails!.posts[index].caption,
                                 Colors.white,
                                 height * 0.014,
                                 FontWeight.bold,
@@ -107,14 +91,12 @@ followersPosts(BuildContext context) {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.favorite_border,
-                              color: Colors.red,
-                            )),
-                        text("1.2K", Colors.white, height * 0.012,
-                            FontWeight.w600, 1),
+                        LikseButton(
+                            id: value.profileDetails!.posts[index].id,
+                            likes: value.profileDetails!.posts[index].likes,
+                            count: value
+                                .profileDetails!.posts[index].likes.length
+                                .toString()),
                         SizedBox(
                           width: width * 0.05,
                         ),
