@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socio/screens/current_user/myposts.dart';
+import 'package:socio/screens/current_user/view/myposts.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
-import 'package:socio/widgets/counts.dart';
-import 'package:socio/widgets/fabicon.dart';
-import 'package:socio/widgets/text.dart';
-import '../theme/theme_mode.dart';
+import 'package:socio/common/counts.dart';
+import 'package:socio/common/fabicon.dart';
+import 'package:socio/common/text.dart';
+import '../../theme/theme_mode.dart';
 import 'highlights.dart';
 import 'tags.dart';
 

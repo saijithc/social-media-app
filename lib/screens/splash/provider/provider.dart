@@ -12,7 +12,7 @@ class SplashProvider with ChangeNotifier {
     // log("token called" + token);
     if (HelperFuction.value == 2) {
       Timer(
-          const Duration(seconds: 6),
+          const Duration(seconds: 3),
           () => Navigator.of(context)
                   .pushReplacement(MaterialPageRoute(
                       builder: (ctx) =>

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
-import 'package:socio/screens/other_users/postview.dart';
-import 'package:socio/screens/other_users/stories.dart';
+import 'package:socio/screens/other_users/view/postview.dart';
+import 'package:socio/screens/other_users/view/stories.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

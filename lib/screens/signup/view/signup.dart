@@ -5,7 +5,7 @@ import 'package:socio/screens/google/provider/provider.dart';
 import 'package:socio/screens/login_activities/view/login.dart';
 import 'package:socio/screens/login_activities/view/widget/textform.dart';
 import 'package:socio/screens/signup/provider/provider.dart';
-import '../../../widgets/text.dart';
+import '../../../common/text.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);

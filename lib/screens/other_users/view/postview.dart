@@ -3,9 +3,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
-import 'package:socio/screens/other_users/post_card.dart';
+import 'package:socio/screens/other_users/view/post_card.dart';
 import 'package:socio/screens/suggestions/view/suggestions.dart';
-import '../suggestions/provider/suggestion_provider.dart';
+import '../../suggestions/provider/suggestion_provider.dart';
 
 class Posts extends StatelessWidget {
   const Posts({Key? key}) : super(key: key);
@@ -24,18 +24,7 @@ class Posts extends StatelessWidget {
                     padding: EdgeInsets.only(top: height * .6 / 3),
                     child: const Text("Check your internet connection"),
                   )
-                :
-                // value.isPostLoading == true
-                //     ? Column(
-                //         children: [
-                //           SizedBox(
-                //             height: height * .6 / 2,
-                //           ),
-                //           // CircularProgressIndicator(),
-                //         ],
-                //       )
-                //     :
-                value.POSTS.length == 0
+                : value.POSTS.length == 0
                     ? Padding(
                         padding: EdgeInsets.only(top: height * .6 / 3),
                         child: SizedBox(

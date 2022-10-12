@@ -4,7 +4,7 @@ import 'package:socio/screens/bottom/view/bottom.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/current_user/widget/add_caption.dart';
 import 'package:socio/screens/theme/theme_mode.dart';
-import 'package:socio/widgets/chooseimage.dart';
+import 'package:socio/common/chooseimage.dart';
 
 class AddPost extends StatelessWidget {
   const AddPost({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class AddPost extends StatelessWidget {
                   return Column(
                     children: [
                       Container(
-                        height: h * 0.5,
+                        height: h * 0.38,
                         width: w * 0.85,
                         decoration: BoxDecoration(
                           image: DecorationImage(
@@ -52,7 +52,7 @@ class AddPost extends StatelessWidget {
                                           .read<CurrentUserProvider>()
                                           .croppedImage!)
                                       .image,
-                              fit: BoxFit.cover),
+                              fit: BoxFit.fitWidth),
                           color: value.thememode == ThemeMode.dark
                               ? Colors.white
                               : Colors.black,

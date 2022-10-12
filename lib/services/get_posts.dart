@@ -14,8 +14,8 @@ class GetPosts {
       Response response = await Dio().get("${Api.baseUrl}/post/timeline/${id}",
           options: Options(headers: token));
       if (response.statusCode! > 199 || response.statusCode! < 300) {
-        log(response.statusCode.toString());
-        log("datas = " + response.data.toString());
+        // log(response.statusCode.toString());
+        // log("datas = " + response.data.toString());
         //log("parsed data =" + getPostModelFromJson(response.data).toString());
         return getPostModelFromJson(response.data);
       }

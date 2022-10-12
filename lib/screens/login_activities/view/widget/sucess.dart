@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/login_activities/provider/provider.dart';
 import 'package:socio/screens/login_activities/view/login.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/common/text.dart';
 
 sucess(context, message) {
   final height = MediaQuery.of(context).size.height;

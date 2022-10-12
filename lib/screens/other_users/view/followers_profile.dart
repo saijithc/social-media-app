@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:socio/screens/other_users/view/profile_buttons.dart';
 import 'package:socio/screens/other_users/provider/provider.dart';
-import 'package:socio/screens/other_users/tag.dart';
+import 'package:socio/screens/other_users/view/tag.dart';
 import 'package:socio/screens/theme/theme_mode.dart';
-import 'package:socio/screens/other_users/followers_highlits.dart';
-import 'package:socio/screens/other_users/followers_post.dart';
-import 'package:socio/widgets/buttons.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/screens/other_users/view/followers_highlits.dart';
+import 'package:socio/screens/other_users/view/followers_post.dart';
+import 'package:socio/common/text.dart';
 
 class FollowersProfile extends StatefulWidget {
   const FollowersProfile({Key? key}) : super(key: key);
-
   @override
   State<FollowersProfile> createState() => _FollowersProfileState();
 }
@@ -35,7 +34,6 @@ class _FollowersProfileState extends State<FollowersProfile>
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
@@ -123,41 +121,8 @@ class _FollowersProfileState extends State<FollowersProfile>
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(top: 15),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              buttons(
-                                                  height * 0.06,
-                                                  width * 0.25,
-                                                  height * 0.03,
-                                                  "Follow",
-                                                  const Color.fromARGB(
-                                                      255, 190, 190, 190),
-                                                  Colors.white,
-                                                  height * 0.015,
-                                                  FontWeight.w500),
-                                              buttons(
-                                                  height * 0.06,
-                                                  width * 0.25,
-                                                  height * 0.03,
-                                                  " ${value.profileDetails!.posts.length.toString()}\nposts",
-                                                  const Color.fromARGB(
-                                                      255, 190, 190, 190),
-                                                  Colors.white,
-                                                  height * 0.015,
-                                                  FontWeight.w500),
-                                              buttons(
-                                                  height * 0.06,
-                                                  width * 0.25,
-                                                  height * 0.03,
-                                                  "Message",
-                                                  const Color.fromARGB(
-                                                      255, 190, 190, 190),
-                                                  Colors.white,
-                                                  height * 0.015,
-                                                  FontWeight.w500),
-                                            ],
+                                          child: ProfileButtons(
+                                            details: value.profileDetails,
                                           ),
                                         ),
                                       ],

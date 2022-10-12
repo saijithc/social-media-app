@@ -4,7 +4,7 @@ import 'package:socio/screens/bottom/Provider/bottom_provider.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
 
 import '../../chats /chat.dart';
-import '../../current_user/profile.dart';
+import '../../current_user/view/profile.dart';
 import '../../home /home.dart';
 import '../../likes/likes.dart';
 import '../../search/search.dart';
@@ -47,7 +47,7 @@ class _BottomState extends State<Bottom> {
               selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
               selectedItemColor:
                   val.thememode == ThemeMode.dark ? Colors.white : Colors.black,
-              unselectedItemColor: const Color.fromARGB(95, 15, 15, 15),
+              unselectedItemColor: Color.fromARGB(95, 156, 153, 153),
               currentIndex: context.watch<BottomProvder>().currentIndex,
               onTap: (newIndex) {
                 context.read<BottomProvder>().update(newIndex);

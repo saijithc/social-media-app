@@ -14,12 +14,13 @@ class SplashScreen extends StatelessWidget {
     log('splash called');
     HelperFuction.value++;
     log(HelperFuction.value.toString());
-    final h = MediaQuery.of(context).size.height;
+    // final h = MediaQuery.of(context).size.height;
     context.read<SplashProvider>().gotoHome(context, isLogged);
     return Scaffold(
         backgroundColor: Colors.black,
         body: Center(
           child: TextLiquidFill(
+            loadDuration: Duration(seconds: 3),
             text: 'TAILUS',
             waveColor: Colors.white
             // Color.fromARGB(255, 68, 255, 255)

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/other_users/provider/provider.dart';
 import 'package:socio/services/follow.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/common/text.dart';
 
 more(BuildContext context, id) {
   final height = MediaQuery.of(context).size.height;
@@ -26,6 +26,9 @@ more(BuildContext context, id) {
                     GestureDetector(
                       onTap: () {
                         FollowAndUnfollow().followAndUnfollow(id);
+                        context
+                            .read<CurrentUserProvider>()
+                            .changeIsFollowingState();
                         value.getMyProfileDetai();
                         value.getPost(context);
                         Navigator.pop(context);

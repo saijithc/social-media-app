@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
 
-import '../screens/current_user/add_post.dart';
-import '../screens/current_user/settings.dart';
+import '../screens/current_user/view/add_post.dart';
+import '../screens/current_user/view/settings.dart';
 
 class FabiconButton extends StatelessWidget {
   const FabiconButton({Key? key}) : super(key: key);

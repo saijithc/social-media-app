@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/chats%20/view/chatroom.dart';
-
-import '../../widgets/text.dart';
+import '../../common/text.dart';
 import '../theme/theme_mode.dart';
 
 class ChatScreen extends StatelessWidget {

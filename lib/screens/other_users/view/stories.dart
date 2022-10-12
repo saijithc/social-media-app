@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:socio/widgets/chooseimage.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/common/chooseimage.dart';
+import 'package:socio/common/text.dart';
 
 class Stories extends StatelessWidget {
   const Stories({Key? key}) : super(key: key);

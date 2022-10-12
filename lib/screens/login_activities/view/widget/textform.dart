@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:socio/widgets/textform.dart';
+import 'package:socio/common/textform.dart';
 
 class CustomTextform extends StatelessWidget {
   const CustomTextform(

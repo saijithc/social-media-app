@@ -6,7 +6,7 @@ import 'package:socio/screens/google/model/model.dart';
 import 'package:socio/screens/login_activities/model/login_model.dart';
 import 'package:socio/screens/login_activities/view/widget/sucess.dart';
 import 'package:socio/screens/signup/model_class/otpverification.dart';
-import 'package:socio/widgets/custom_snackbar.dart';
+import 'package:socio/common/custom_snackbar.dart';
 import '../helperfunction/helper_function.dart';
 import '../screens/signup/model_class/model.dart';
 

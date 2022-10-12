@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:socio/screens/other_users/followers_profile.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/screens/other_users/view/followers_profile.dart';
+import 'package:socio/common/text.dart';
 
 class CaptionScreen extends StatelessWidget {
   const CaptionScreen({Key? key, required this.caption, required this.comment})

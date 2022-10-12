@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:socio/screens/bottom/view/bottom.dart';
 import 'package:socio/screens/signup/model_class/model.dart';
 import 'package:socio/services/authentication.dart';
-import 'package:socio/widgets/custom_snackbar.dart';
+import 'package:socio/common/custom_snackbar.dart';
 
 class OtpProvider with ChangeNotifier {
   bool loadining = false;

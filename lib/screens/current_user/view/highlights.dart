@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:socio/widgets/text.dart';
 
-class FollowersHighLights extends StatelessWidget {
-  const FollowersHighLights({Key? key}) : super(key: key);
+import '../../../common/chooseimage.dart';
+import '../../../common/text.dart';
+
+class HighLights extends StatelessWidget {
+  const HighLights({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,36 @@ class FollowersHighLights extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(
-              width: width * 0.01,
+              width: width * 0.025,
+            ),
+            Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    choose(context);
+                  },
+                  child: Container(
+                    height: height * 0.1,
+                    width: width * 0.2,
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(30)),
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: height * 0.05,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                text1(
+                  "New",
+                  sizes: height * 0.015,
+                  weight: FontWeight.w600,
+                )
+              ],
             ),
             SizedBox(
               child: ListView.builder(
@@ -29,15 +60,17 @@ class FollowersHighLights extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            height: height * 0.09,
+                            height: height * 0.1,
                             width: width * 0.2,
                             decoration: BoxDecoration(
                                 image: const DecorationImage(
-                                    image: AssetImage("assets/_ (4).jpeg"),
+                                    image: AssetImage("assets/me.jpg"),
                                     fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(30)),
                           ),
-                          const SizedBox(height: 5),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           text1("Highlight",
                               sizes: height * 0.015, weight: FontWeight.w600),
                         ],

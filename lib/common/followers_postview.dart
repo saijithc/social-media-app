@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pinch_zoom_release_unzoom/pinch_zoom_release_unzoom.dart';
 import 'package:socio/screens/other_users/provider/provider.dart';
-import 'package:socio/widgets/more.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/common/more.dart';
+import 'package:socio/common/text.dart';
 
 import 'like_button.dart';
 

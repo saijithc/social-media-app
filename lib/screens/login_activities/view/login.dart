@@ -8,7 +8,7 @@ import 'package:socio/screens/login_activities/provider/provider.dart';
 import 'package:socio/screens/login_activities/view/widget/forgot.dart';
 import 'package:socio/screens/signup/view/signup.dart';
 import 'package:socio/screens/login_activities/view/widget/textform.dart';
-import '../../../widgets/text.dart';
+import '../../../common/text.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);

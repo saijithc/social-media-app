@@ -10,6 +10,7 @@ Widget buttons(height, width, radius, text, color, tcolor, tsizes, tweight) {
       ),
       child: Center(
         child: Text(text,
+            textAlign: TextAlign.center,
             style: TextStyle(
                 color: tcolor, fontSize: tsizes, fontWeight: tweight)),
       ));

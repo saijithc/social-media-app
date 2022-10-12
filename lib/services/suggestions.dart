@@ -14,8 +14,8 @@ class Suggestion {
           "${Api.baseUrl}/user/suggestion/${id}",
           options: Options(headers: token));
       if (response.statusCode! > 199 || response.statusCode! < 300) {
-        log(response.data.toString());
-        log(response.statusCode.toString());
+        // log(response.data.toString());
+        // log(response.statusCode.toString());
         return response.data;
       } else {
         log(response.statusCode!.toString());

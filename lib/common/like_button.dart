@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/current_user/model/user.dart';
 import 'package:socio/screens/other_users/provider/provider.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/common/text.dart';
 
 class LikseButton extends StatefulWidget {
   LikseButton(

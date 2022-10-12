@@ -12,8 +12,9 @@ import 'package:socio/screens/suggestions/provider/suggestion_provider.dart';
 import 'package:socio/services/addpost.dart';
 import 'package:socio/services/current_user_details.dart';
 import 'package:socio/services/delete_post.dart';
+import 'package:socio/services/follow.dart';
 import 'package:socio/services/get_posts.dart';
-import 'package:socio/widgets/custom_snackbar.dart';
+import 'package:socio/common/custom_snackbar.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class CurrentUserProvider with ChangeNotifier {
@@ -25,6 +26,8 @@ class CurrentUserProvider with ChangeNotifier {
   File? croppedImage;
   bool noNetwork = false;
   bool isLoading = false;
+  bool loading = false;
+
   bool isPostLoading = false;
   UserDetails? MyDetails;
   List<GetPostModel> POSTS = [];
@@ -75,7 +78,7 @@ class CurrentUserProvider with ChangeNotifier {
       uiSettings: [
         AndroidUiSettings(
             toolbarTitle: 'Cropper',
-            toolbarColor: Colors.deepOrange,
+            toolbarColor: Colors.black,
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: true),
@@ -135,7 +138,22 @@ class CurrentUserProvider with ChangeNotifier {
     }
   }
 
+  followAndUnfollow(id) {
+    loading = true;
+    notifyListeners();
+    FollowAndUnfollow().followAndUnfollow(id).then((value) {
+      loading = false;
+      notifyListeners();
+    });
+  }
+
+  changeIsFollowingState() {
+    isFollowing = !isFollowing;
+    notifyListeners();
+  }
+
   checkFollowed(id) {
+    log("checkFollowed called");
     if (MyDetails!.following.contains(id)) {
       isFollowing = true;
     } else {
@@ -167,6 +185,7 @@ class CurrentUserProvider with ChangeNotifier {
       } else {
         isLoading = false;
         notifyListeners();
+        customSnackBar(context, value.toString());
         Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (ctx) => Bottom()));
         customSnackBar(context, value.toString());

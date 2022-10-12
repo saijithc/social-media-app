@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:socio/services/get_posts.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/common/text.dart';
 
 class Likes extends StatelessWidget {
   const Likes({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/common/text.dart';
 
 options(BuildContext context, postId) {
   final height = MediaQuery.of(context).size.height;

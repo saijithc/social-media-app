@@ -5,9 +5,9 @@ import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/current_user/widget/switch.dart';
 import 'package:socio/screens/google/provider/provider.dart';
 import 'package:socio/screens/login_activities/view/login.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/common/text.dart';
 
-import '../../widgets/buttons.dart';
+import '../../../common/buttons.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);

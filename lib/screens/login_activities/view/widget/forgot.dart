@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/common/text.dart';
 import '../../provider/provider.dart';
 import 'textform.dart';
 

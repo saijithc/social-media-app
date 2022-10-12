@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:socio/screens/signup/model_class/model.dart';
 import 'package:socio/screens/signup/provider/otp_provider.dart';
 import 'package:socio/screens/signup/provider/provider.dart';
-import 'package:socio/widgets/text.dart';
+import 'package:socio/common/text.dart';
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({Key? key, required this.user}) : super(key: key);

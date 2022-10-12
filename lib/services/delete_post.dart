@@ -25,10 +25,11 @@ class DeletePostApi {
     } catch (e) {
       if (e is DioError) {
         log(e.message);
+        return e.message;
       } else {
         log(e.toString());
+        return e.toString();
       }
     }
-    return null;
   }
 }

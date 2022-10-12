@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:socio/screens/google/model/model.dart';
 import 'package:socio/services/authentication.dart';
-import 'package:socio/widgets/custom_snackbar.dart';
+import 'package:socio/common/custom_snackbar.dart';
 import '../../bottom/view/bottom.dart';
 
 class GoogleProvider with ChangeNotifier {

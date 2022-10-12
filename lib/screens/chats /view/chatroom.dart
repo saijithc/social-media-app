@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../widgets/text.dart';
+import '../../../common/text.dart';
 
 class ChatRoom extends StatelessWidget {
   const ChatRoom({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socio/screens/current_user/add_post.dart';
+import 'package:socio/screens/current_user/view/add_post.dart';
 import 'package:socio/screens/current_user/provider/provider.dart';
 import 'package:socio/screens/theme/theme_mode.dart';
 
