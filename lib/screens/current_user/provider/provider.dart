@@ -138,13 +138,13 @@ class CurrentUserProvider with ChangeNotifier {
     }
   }
 
-  followAndUnfollow(id) {
+  Future followAndUnfollow(id) async {
     loading = true;
     notifyListeners();
-    FollowAndUnfollow().followAndUnfollow(id).then((value) {
-      loading = false;
-      notifyListeners();
-    });
+    await FollowAndUnfollow().followAndUnfollow(id);
+    getMyProfileDetai();
+    loading = false;
+    notifyListeners();
   }
 
   changeIsFollowingState() {

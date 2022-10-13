@@ -26,9 +26,7 @@ more(BuildContext context, id) {
                     GestureDetector(
                       onTap: () {
                         FollowAndUnfollow().followAndUnfollow(id);
-                        context
-                            .read<CurrentUserProvider>()
-                            .changeIsFollowingState();
+
                         value.getMyProfileDetai();
                         value.getPost(context);
                         Navigator.pop(context);

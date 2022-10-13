@@ -24,7 +24,6 @@ class ProfileButtons extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            context.read<CurrentUserProvider>().changeIsFollowingState();
             context.read<CurrentUserProvider>().checkFollowed(details!.id);
             FollowAndUnfollow().followAndUnfollow(details!.id);
           },

@@ -16,6 +16,7 @@ class ShowSuggestions extends StatelessWidget {
     final w = MediaQuery.of(context).size.width;
     return Consumer<SuggestionProvider>(builder: (context, value, child) {
       return ListView.builder(
+        physics: BouncingScrollPhysics(),
         itemCount: value.suggestions.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
@@ -54,7 +55,7 @@ class ShowSuggestions extends StatelessWidget {
                     text1(value.suggestions[index].fullname,
                         color: Colors.white, weight: FontWeight.bold),
                     FollowButton(
-                      index: index,
+                      details: value.suggestions[index].id,
                     )
                   ],
                 ),

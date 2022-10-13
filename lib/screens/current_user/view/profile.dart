@@ -70,7 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(50),
                                     bottomRight: Radius.circular(50))),
-                            height: height * 0.28,
+                            height: height * 0.25,
                             width: width,
                             child: Column(
                               children: [
@@ -122,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 //   height: height * 0.02,
                                 // ),
                                 // EditAndAddButtons(context),
-                                SizedBox(height: height * 0.05),
+                                SizedBox(height: height * 0.03),
                                 Counts(context)
                               ],
                             ),

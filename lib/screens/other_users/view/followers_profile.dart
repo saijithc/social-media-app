@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:socio/screens/current_user/model/current_user_details.dart';
+import 'package:socio/screens/current_user/view/followerslist.dart';
 import 'package:socio/screens/other_users/view/profile_buttons.dart';
 import 'package:socio/screens/other_users/provider/provider.dart';
 import 'package:socio/screens/other_users/view/tag.dart';
 import 'package:socio/screens/theme/theme_mode.dart';
 import 'package:socio/screens/other_users/view/followers_highlits.dart';
 import 'package:socio/screens/other_users/view/followers_post.dart';
-import 'package:socio/common/text.dart';
+import 'followers_details.dart';
 
 class FollowersProfile extends StatefulWidget {
   const FollowersProfile({Key? key}) : super(key: key);
@@ -44,8 +46,6 @@ class _FollowersProfileState extends State<FollowersProfile>
                 : CustomScrollView(
                     slivers: <Widget>[
                       SliverAppBar(
-                        // pinned: true,
-                        // floating: true,
                         expandedHeight: height * 0.4,
                         flexibleSpace: FlexibleSpaceBar(
                             background: Image(
@@ -74,59 +74,12 @@ class _FollowersProfileState extends State<FollowersProfile>
                                   SizedBox(
                                       width: width * 0.4,
                                       child: const Divider(
-                                        //color: Colors.black26,
                                         thickness: 5,
                                       )),
                                   Padding(
                                     padding: const EdgeInsets.all(10),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            text(
-                                                value.profileDetails!.bio,
-                                                Colors.red,
-                                                height * 0.015,
-                                                FontWeight.w700,
-                                                1)
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: height * 0.02,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            text1(
-                                                value.profileDetails!.fullname,
-                                                sizes: height * 0.03,
-                                                weight: FontWeight.w800),
-                                            Column(
-                                              children: [
-                                                text1(
-                                                  value.profileDetails!
-                                                      .followers.length
-                                                      .toString(),
-                                                  sizes: height * 0.03,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                                text1("Followers",
-                                                    sizes: height * 0.014,
-                                                    weight: FontWeight.bold)
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 15),
-                                          child: ProfileButtons(
-                                            details: value.profileDetails,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                    child: FollowerDetails(
+                                        value: value.profileDetails!),
                                   ),
                                   SizedBox(
                                     height: height * 0.04,
